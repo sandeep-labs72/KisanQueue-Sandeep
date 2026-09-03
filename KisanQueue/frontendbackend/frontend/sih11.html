@@ -224,7 +224,11 @@
             <span class="nav-badge" id="sidebarNotifBadge">3</span>
           </button>
 
-          <button class="nav-item sub-nav-item" data-page="voice" id="sidebarVoiceBtn">
+          <button
+            class="nav-item sub-nav-item"
+            data-page="voice"
+            id="sidebarVoiceBtn"
+          >
             <i class="fa-solid fa-microphone"></i>
             <div class="nav-label-stack">
               <span>Voice Assistant</span>
@@ -265,10 +269,24 @@
         </nav>
 
         <!-- BOTTOM PROFILE CARD -->
-        <div class="sidebar-profile-card" id="sidebarFarmerCard" title="Click for Profile & Logout">
+        <div
+          class="sidebar-profile-card"
+          id="sidebarFarmerCard"
+          title="Click for Profile & Logout"
+        >
           <div class="profile-avatar">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Farmer Avatar" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div class="avatar-fallback" style="display:none;"><i class="fa-solid fa-user"></i></div>
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
+              alt="Farmer Avatar"
+              class="avatar-img"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+              "
+            />
+            <div class="avatar-fallback" style="display: none">
+              <i class="fa-solid fa-user"></i>
+            </div>
           </div>
           <div class="profile-meta">
             <strong id="sidebarFarmerName">Ramesh Kumar</strong>
@@ -279,56 +297,112 @@
 
         <!-- SIDEBAR AGRICULTURAL SCENERY ILLUSTRATION -->
         <div class="sidebar-scenery-container">
-          <svg class="sidebar-scenery-svg" viewBox="0 0 270 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            class="sidebar-scenery-svg"
+            viewBox="0 0 270 110"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <defs>
               <linearGradient id="hillGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#bce3c5"/>
-                <stop offset="100%" stop-color="#9bd4a7"/>
+                <stop offset="0%" stop-color="#bce3c5" />
+                <stop offset="100%" stop-color="#9bd4a7" />
               </linearGradient>
               <linearGradient id="hillGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#80c68d"/>
-                <stop offset="100%" stop-color="#46a058"/>
+                <stop offset="0%" stop-color="#80c68d" />
+                <stop offset="100%" stop-color="#46a058" />
               </linearGradient>
-              <linearGradient id="fieldStripes" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#2c893f"/>
-                <stop offset="100%" stop-color="#186b29"/>
+              <linearGradient
+                id="fieldStripes"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="#2c893f" />
+                <stop offset="100%" stop-color="#186b29" />
               </linearGradient>
             </defs>
             <!-- Background sky soft gradient -->
-            <rect width="270" height="110" fill="#e8f5ec"/>
+            <rect width="270" height="110" fill="#e8f5ec" />
             <!-- Far hills -->
-            <path d="M0 70 Q 70 35 150 55 T 270 50 L 270 110 L 0 110 Z" fill="url(#hillGrad1)" opacity="0.8"/>
+            <path
+              d="M0 70 Q 70 35 150 55 T 270 50 L 270 110 L 0 110 Z"
+              fill="url(#hillGrad1)"
+              opacity="0.8"
+            />
             <!-- Trees on hills -->
-            <circle cx="150" cy="45" r="10" fill="#67ab73"/>
-            <circle cx="160" cy="42" r="14" fill="#4d9b5c"/>
-            <circle cx="172" cy="46" r="9" fill="#67ab73"/>
-            <rect x="159" y="52" width="3" height="12" fill="#5c4033"/>
+            <circle cx="150" cy="45" r="10" fill="#67ab73" />
+            <circle cx="160" cy="42" r="14" fill="#4d9b5c" />
+            <circle cx="172" cy="46" r="9" fill="#67ab73" />
+            <rect x="159" y="52" width="3" height="12" fill="#5c4033" />
             <!-- Near rolling field -->
-            <path d="M0 65 Q 110 50 190 75 T 270 65 L 270 110 L 0 110 Z" fill="url(#hillGrad2)"/>
+            <path
+              d="M0 65 Q 110 50 190 75 T 270 65 L 270 110 L 0 110 Z"
+              fill="url(#hillGrad2)"
+            />
             <!-- Crop furrows -->
-            <path d="M0 90 Q 90 70 200 95 L 270 90 L 270 110 L 0 110 Z" fill="url(#fieldStripes)"/>
+            <path
+              d="M0 90 Q 90 70 200 95 L 270 90 L 270 110 L 0 110 Z"
+              fill="url(#fieldStripes)"
+            />
             <!-- Furrow lines -->
-            <line x1="20" y1="110" x2="90" y2="80" stroke="#3da050" stroke-width="2"/>
-            <line x1="60" y1="110" x2="130" y2="82" stroke="#3da050" stroke-width="2"/>
-            <line x1="110" y1="110" x2="165" y2="84" stroke="#3da050" stroke-width="2"/>
-            <line x1="160" y1="110" x2="200" y2="85" stroke="#3da050" stroke-width="2"/>
+            <line
+              x1="20"
+              y1="110"
+              x2="90"
+              y2="80"
+              stroke="#3da050"
+              stroke-width="2"
+            />
+            <line
+              x1="60"
+              y1="110"
+              x2="130"
+              y2="82"
+              stroke="#3da050"
+              stroke-width="2"
+            />
+            <line
+              x1="110"
+              y1="110"
+              x2="165"
+              y2="84"
+              stroke="#3da050"
+              stroke-width="2"
+            />
+            <line
+              x1="160"
+              y1="110"
+              x2="200"
+              y2="85"
+              stroke="#3da050"
+              stroke-width="2"
+            />
             <!-- Green Tractor Vector -->
             <g transform="translate(100, 58) scale(0.65)">
               <!-- Tractor Body -->
-              <rect x="10" y="16" width="28" height="16" rx="3" fill="#1b8535"/>
-              <rect x="18" y="6" width="18" height="12" rx="2" fill="#2eb04f"/>
+              <rect
+                x="10"
+                y="16"
+                width="28"
+                height="16"
+                rx="3"
+                fill="#1b8535"
+              />
+              <rect x="18" y="6" width="18" height="12" rx="2" fill="#2eb04f" />
               <!-- Cabin window -->
-              <rect x="22" y="8" width="12" height="7" rx="1" fill="#c3ebff"/>
+              <rect x="22" y="8" width="12" height="7" rx="1" fill="#c3ebff" />
               <!-- Exhaust pipe -->
-              <rect x="12" y="2" width="2" height="14" fill="#333"/>
+              <rect x="12" y="2" width="2" height="14" fill="#333" />
               <!-- Big Rear Wheel -->
-              <circle cx="34" cy="30" r="12" fill="#2d3748"/>
-              <circle cx="34" cy="30" r="8" fill="#cbd5e1"/>
-              <circle cx="34" cy="30" r="3" fill="#2d3748"/>
+              <circle cx="34" cy="30" r="12" fill="#2d3748" />
+              <circle cx="34" cy="30" r="8" fill="#cbd5e1" />
+              <circle cx="34" cy="30" r="3" fill="#2d3748" />
               <!-- Small Front Wheel -->
-              <circle cx="10" cy="34" r="7" fill="#2d3748"/>
-              <circle cx="10" cy="34" r="4" fill="#cbd5e1"/>
-              <circle cx="10" cy="34" r="2" fill="#2d3748"/>
+              <circle cx="10" cy="34" r="7" fill="#2d3748" />
+              <circle cx="10" cy="34" r="4" fill="#cbd5e1" />
+              <circle cx="10" cy="34" r="2" fill="#2d3748" />
             </g>
           </svg>
         </div>
@@ -341,12 +415,22 @@
         <!-- TOP HEADER -->
         <header class="top-header">
           <div class="header-left">
-            <button class="mobile-toggle-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+            <button
+              class="mobile-toggle-btn"
+              id="mobileMenuBtn"
+              aria-label="Toggle Menu"
+            >
               <i class="fa-solid fa-bars"></i>
             </button>
             <div class="greeting-box">
-              <h1 id="headerGreeting">Good Morning, <span id="headerFarmerName">Ramesh Kumar</span>! 👋</h1>
-              <p id="headerSubtitle">Today is your <span id="headerCropName">Wheat</span> procurement day.</p>
+              <h1 id="headerGreeting">
+                Good Morning, <span id="headerFarmerName">Ramesh Kumar</span>!
+                👋
+              </h1>
+              <p id="headerSubtitle">
+                Today is your <span id="headerCropName">Wheat</span> procurement
+                day.
+              </p>
             </div>
           </div>
 
@@ -372,20 +456,30 @@
             </div>
 
             <!-- VOICE BUTTON -->
-            <button class="header-pill voice-pill" id="headerVoiceBtn" title="Speak to Voice Assistant">
+            <button
+              class="header-pill voice-pill"
+              id="headerVoiceBtn"
+              title="Speak to Voice Assistant"
+            >
               <i class="fa-solid fa-microphone"></i>
               <span>Voice</span>
             </button>
 
             <!-- NOTIFICATION BUTTON -->
-            <button class="header-pill notif-pill" id="headerNotifBtn" title="Notifications">
+            <button
+              class="header-pill notif-pill"
+              id="headerNotifBtn"
+              title="Notifications"
+            >
               <i class="fa-regular fa-bell"></i>
               <span class="notif-count" id="headerNotifBadge">3</span>
             </button>
 
             <!-- LIVE DATE & CLOCK -->
             <div class="live-datetime-box">
-              <span class="live-date" id="liveDate">28 August 2026, Thursday</span>
+              <span class="live-date" id="liveDate"
+                >28 August 2026, Thursday</span
+              >
               <span class="live-clock">
                 <i class="fa-regular fa-clock"></i>
                 <strong id="liveTime">09:15 AM</strong>
@@ -400,7 +494,9 @@
             <i class="fa-solid fa-location-dot"></i>
             <strong id="stripCentreName">Centre A, Bhagalpur</strong>
           </div>
-          <button class="centre-change-btn" id="changeCentreBtn">Change Centre</button>
+          <button class="centre-change-btn" id="changeCentreBtn">
+            Change Centre
+          </button>
         </div>
 
         <!-- =================================================
@@ -448,7 +544,11 @@
               <!-- NOTIFICATION ADVISORY BOX -->
               <div class="advisory-box yellow-advisory">
                 <i class="fa-regular fa-bell"></i>
-                <span>We will notify you <strong id="dashNotifyThreshold">5 farmers</strong> before your turn.</span>
+                <span
+                  >We will notify you
+                  <strong id="dashNotifyThreshold">5 farmers</strong> before
+                  your turn.</span
+                >
               </div>
 
               <!-- LISTEN TO UPDATE BUTTON -->
@@ -486,7 +586,9 @@
                   <span class="metric-name">
                     <i class="fa-solid fa-car-side"></i> Travel Time
                   </span>
-                  <strong class="metric-val" id="dashTravelTime">18 mins</strong>
+                  <strong class="metric-val" id="dashTravelTime"
+                    >18 mins</strong
+                  >
                 </div>
 
                 <div class="metric-row">
@@ -522,7 +624,11 @@
                     <i class="fa-solid fa-wheat-awn"></i>
                   </div>
                   <div class="step-info-text">
-                    <p>After reaching the centre, you will go for <strong id="dashNextStageName">Quality Check</strong> for <span id="dashNextCrop">Wheat</span>.</p>
+                    <p>
+                      After reaching the centre, you will go for
+                      <strong id="dashNextStageName">Quality Check</strong> for
+                      <span id="dashNextCrop">Wheat</span>.
+                    </p>
                   </div>
                 </div>
 
@@ -541,12 +647,20 @@
 
                 <div class="smart-wait-body">
                   <span class="smart-sub">Your expected turn around</span>
-                  <div class="smart-turn-time" id="dashExpectedTurnTime">11:32 AM</div>
-                  <p class="smart-description">The queue is slow right now. You can comfortably stay at home.</p>
+                  <div class="smart-turn-time" id="dashExpectedTurnTime">
+                    11:32 AM
+                  </div>
+                  <p class="smart-description">
+                    The queue is slow right now. You can comfortably stay at
+                    home.
+                  </p>
 
                   <div class="smart-reminder-pill">
                     <i class="fa-regular fa-bell"></i>
-                    <span>We will remind you to leave at <strong id="dashRemindAtTime">10:50 AM</strong>.</span>
+                    <span
+                      >We will remind you to leave at
+                      <strong id="dashRemindAtTime">10:50 AM</strong>.</span
+                    >
                   </div>
                 </div>
               </div>
@@ -607,8 +721,12 @@
                 <i class="fa-solid fa-triangle-exclamation"></i>
               </div>
               <div class="notice-content">
-                <strong id="noticeBannerTitle">Centre A is very busy today.</strong>
-                <p id="noticeBannerDesc">Your wait time may be longer than usual.</p>
+                <strong id="noticeBannerTitle"
+                  >Centre A is very busy today.</strong
+                >
+                <p id="noticeBannerDesc">
+                  Your wait time may be longer than usual.
+                </p>
               </div>
               <button class="notice-action-btn" id="noticeOtherCentresBtn">
                 <span>Check Other Centres</span>
@@ -629,8 +747,14 @@
                     <i class="fa-solid fa-bell"></i>
                   </div>
                   <div class="stream-body">
-                    <strong class="stream-title">Your turn is approaching. (<span id="notifTokenVal">A-018</span>)</strong>
-                    <span class="stream-desc">We will notify you when 5 farmers are ahead of you.</span>
+                    <strong class="stream-title"
+                      >Your turn is approaching. (<span id="notifTokenVal"
+                        >A-018</span
+                      >)</strong
+                    >
+                    <span class="stream-desc"
+                      >We will notify you when 5 farmers are ahead of you.</span
+                    >
                   </div>
                   <span class="stream-time">2 mins ago</span>
                 </div>
@@ -641,8 +765,15 @@
                     <i class="fa-solid fa-calendar-check"></i>
                   </div>
                   <div class="stream-body">
-                    <strong class="stream-title">Slot booked successfully for <span id="notifSlotDate">28 Aug 2026 (10:00 AM - 11:00 AM)</span></strong>
-                    <span class="stream-desc" id="notifCentreName">Centre A, Bhagalpur</span>
+                    <strong class="stream-title"
+                      >Slot booked successfully for
+                      <span id="notifSlotDate"
+                        >28 Aug 2026 (10:00 AM - 11:00 AM)</span
+                      ></strong
+                    >
+                    <span class="stream-desc" id="notifCentreName"
+                      >Centre A, Bhagalpur</span
+                    >
                   </div>
                   <span class="stream-time">15 mins ago</span>
                 </div>
@@ -653,8 +784,14 @@
                     <i class="fa-solid fa-indian-rupee-sign"></i>
                   </div>
                   <div class="stream-body">
-                    <strong class="stream-title">Payment of <span id="notifPaymentVal">₹9,240</span> initiated.</strong>
-                    <span class="stream-desc">It will be credited within 24 hours.</span>
+                    <strong class="stream-title"
+                      >Payment of
+                      <span id="notifPaymentVal">₹9,240</span>
+                      initiated.</strong
+                    >
+                    <span class="stream-desc"
+                      >It will be credited within 24 hours.</span
+                    >
                   </div>
                   <span class="stream-time">1 day ago</span>
                 </div>
@@ -664,8 +801,12 @@
             <!-- LIVE QUEUE AT CENTRE -->
             <div class="card live-queue-card">
               <div class="live-queue-header">
-                <h3 class="section-title">LIVE QUEUE AT <span id="lqCentreHeader">CENTRE A</span></h3>
-                <button class="view-full-queue-link" id="viewFullQueueBtn">View Full Queue</button>
+                <h3 class="section-title">
+                  LIVE QUEUE AT <span id="lqCentreHeader">CENTRE A</span>
+                </h3>
+                <button class="view-full-queue-link" id="viewFullQueueBtn">
+                  View Full Queue
+                </button>
               </div>
 
               <!-- 3-COL STATS BOX -->
@@ -673,7 +814,9 @@
                 <div class="stat-col">
                   <span class="stat-label">Now Serving</span>
                   <strong class="stat-val" id="lqNowServing">A-012</strong>
-                  <small class="stat-sub" id="lqCurrentFarmerName">Mahendra Singh</small>
+                  <small class="stat-sub" id="lqCurrentFarmerName"
+                    >Mahendra Singh</small
+                  >
                 </div>
 
                 <div class="stat-col">
@@ -709,7 +852,10 @@
           <div class="panel-header">
             <div>
               <h2>Book Procurement Slot / Token</h2>
-              <p>Select your preferred centre, crop, and time slot for direct mandi entry.</p>
+              <p>
+                Select your preferred centre, crop, and time slot for direct
+                mandi entry.
+              </p>
             </div>
             <button class="back-to-dash-btn">
               <i class="fa-solid fa-arrow-left"></i> Dashboard
@@ -724,16 +870,26 @@
               <div class="input-field-group">
                 <label>Select Procurement Centre</label>
                 <select id="bookingCentreSelect" class="styled-select">
-                  <option value="Centre A, Bhagalpur">Centre A, Bhagalpur (Primary Mandi)</option>
-                  <option value="Centre B, Sabour">Centre B, Sabour (Buffer Warehouse)</option>
-                  <option value="Centre C, Nathnagar">Centre C, Nathnagar (Cooperative Center)</option>
+                  <option value="Centre A, Bhagalpur">
+                    Centre A, Bhagalpur (Primary Mandi)
+                  </option>
+                  <option value="Centre B, Sabour">
+                    Centre B, Sabour (Buffer Warehouse)
+                  </option>
+                  <option value="Centre C, Nathnagar">
+                    Centre C, Nathnagar (Cooperative Center)
+                  </option>
                 </select>
               </div>
 
               <div class="input-field-group">
                 <label>Select Crop</label>
                 <div class="crop-choice-chips">
-                  <button type="button" class="crop-chip selected" data-crop="Wheat">
+                  <button
+                    type="button"
+                    class="crop-chip selected"
+                    data-crop="Wheat"
+                  >
                     <i class="fa-solid fa-wheat-awn"></i> Wheat
                   </button>
                   <button type="button" class="crop-chip" data-crop="Rice">
@@ -751,7 +907,14 @@
                   <label>Quantity (in kg)</label>
                   <div class="styled-input-wrapper">
                     <i class="fa-solid fa-weight-hanging"></i>
-                    <input type="number" id="bookingQuantityInput" placeholder="e.g. 50" min="1" max="10000" value="50" />
+                    <input
+                      type="number"
+                      id="bookingQuantityInput"
+                      placeholder="e.g. 50"
+                      min="1"
+                      max="10000"
+                      value="50"
+                    />
                   </div>
                 </div>
 
@@ -767,12 +930,24 @@
               <div class="input-field-group">
                 <label>Available Time Slots</label>
                 <div class="time-slots-grid">
-                  <button type="button" class="time-slot-btn">09:00 - 10:00 AM</button>
-                  <button type="button" class="time-slot-btn selected">10:00 - 11:00 AM</button>
-                  <button type="button" class="time-slot-btn">11:00 - 12:00 PM</button>
-                  <button type="button" class="time-slot-btn">12:00 - 01:00 PM</button>
-                  <button type="button" class="time-slot-btn">02:00 - 03:00 PM</button>
-                  <button type="button" class="time-slot-btn">03:00 - 04:00 PM</button>
+                  <button type="button" class="time-slot-btn">
+                    09:00 - 10:00 AM
+                  </button>
+                  <button type="button" class="time-slot-btn selected">
+                    10:00 - 11:00 AM
+                  </button>
+                  <button type="button" class="time-slot-btn">
+                    11:00 - 12:00 PM
+                  </button>
+                  <button type="button" class="time-slot-btn">
+                    12:00 - 01:00 PM
+                  </button>
+                  <button type="button" class="time-slot-btn">
+                    02:00 - 03:00 PM
+                  </button>
+                  <button type="button" class="time-slot-btn">
+                    03:00 - 04:00 PM
+                  </button>
                 </div>
               </div>
 
@@ -790,7 +965,10 @@
                   <i class="fa-solid fa-circle-check"></i>
                   <div>
                     <strong>Government Minimum Support Price (MSP)</strong>
-                    <p>Direct electronic bank settlement guaranteed within 24-48 hours of quality approval.</p>
+                    <p>
+                      Direct electronic bank settlement guaranteed within 24-48
+                      hours of quality approval.
+                    </p>
                   </div>
                 </div>
 
@@ -798,7 +976,10 @@
                   <i class="fa-solid fa-clock-rotate-left"></i>
                   <div>
                     <strong>Punctual Arrival</strong>
-                    <p>Please reach 10 minutes prior to your designated slot to complete security gate entry.</p>
+                    <p>
+                      Please reach 10 minutes prior to your designated slot to
+                      complete security gate entry.
+                    </p>
                   </div>
                 </div>
 
@@ -806,7 +987,10 @@
                   <i class="fa-solid fa-id-card"></i>
                   <div>
                     <strong>Documents to Carry</strong>
-                    <p>Carry your Aadhaar card and bank passbook/account verification copy.</p>
+                    <p>
+                      Carry your Aadhaar card and bank passbook/account
+                      verification copy.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -832,17 +1016,27 @@
             <div class="card my-turn-spotlight-card">
               <div class="spotlight-header">
                 <span>YOUR ASSIGNED TOKEN</span>
-                <button class="refresh-queue-btn" id="refreshQueueBtn" title="Refresh Live Status">
+                <button
+                  class="refresh-queue-btn"
+                  id="refreshQueueBtn"
+                  title="Refresh Live Status"
+                >
                   <i class="fa-solid fa-arrows-rotate"></i> Refresh
                 </button>
               </div>
 
               <div class="spotlight-token" id="queueBigToken">A-018</div>
               <h3 id="queueStatusHeading">Token Active</h3>
-              <p class="spotlight-ahead" id="queueAheadText">6 farmers are ahead of you.</p>
+              <p class="spotlight-ahead" id="queueAheadText">
+                6 farmers are ahead of you.
+              </p>
 
               <div class="spotlight-progress">
-                <div class="bar-fill" id="queueProgressBar" style="width: 50%;"></div>
+                <div
+                  class="bar-fill"
+                  id="queueProgressBar"
+                  style="width: 50%"
+                ></div>
               </div>
 
               <div class="spotlight-stats-row">
@@ -879,19 +1073,31 @@
                       <td><strong>A-012</strong></td>
                       <td>Mahendra Singh</td>
                       <td>Wheat</td>
-                      <td><span class="status-chip chip-serving">Serving Now</span></td>
+                      <td>
+                        <span class="status-chip chip-serving"
+                          >Serving Now</span
+                        >
+                      </td>
                     </tr>
                     <tr>
                       <td><strong>A-015</strong></td>
                       <td>Sanjay Yadav</td>
                       <td>Wheat</td>
-                      <td><span class="status-chip chip-waiting">Waiting</span></td>
+                      <td>
+                        <span class="status-chip chip-waiting">Waiting</span>
+                      </td>
                     </tr>
                     <tr class="highlight-user-row">
                       <td><strong>A-018</strong></td>
-                      <td><span id="rosterUserName">Ramesh Kumar (You)</span></td>
+                      <td>
+                        <span id="rosterUserName">Ramesh Kumar (You)</span>
+                      </td>
                       <td>Wheat</td>
-                      <td><span class="status-chip chip-waiting">Your Turn Next</span></td>
+                      <td>
+                        <span class="status-chip chip-waiting"
+                          >Your Turn Next</span
+                        >
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -907,7 +1113,10 @@
           <div class="panel-header">
             <div>
               <h2>My Produce & MSP Valuation</h2>
-              <p>Registered agricultural produce batches and procurement valuation.</p>
+              <p>
+                Registered agricultural produce batches and procurement
+                valuation.
+              </p>
             </div>
             <button class="back-to-dash-btn">
               <i class="fa-solid fa-arrow-left"></i> Dashboard
@@ -944,10 +1153,22 @@
             <div class="card produce-quality-card">
               <h3>Fair Average Quality (FAQ) Standards</h3>
               <ul class="quality-checklist">
-                <li><i class="fa-solid fa-check"></i> Moisture content must be below 12% by weight.</li>
-                <li><i class="fa-solid fa-check"></i> Inorganic foreign matter should not exceed 0.75%.</li>
-                <li><i class="fa-solid fa-check"></i> Free of weevilled grains and storage pests.</li>
-                <li><i class="fa-solid fa-check"></i> Clean jute/HDPE bag packaging recommended.</li>
+                <li>
+                  <i class="fa-solid fa-check"></i> Moisture content must be
+                  below 12% by weight.
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i> Inorganic foreign matter
+                  should not exceed 0.75%.
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i> Free of weevilled grains and
+                  storage pests.
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i> Clean jute/HDPE bag
+                  packaging recommended.
+                </li>
               </ul>
             </div>
           </div>
@@ -960,7 +1181,10 @@
           <div class="panel-header">
             <div>
               <h2>Procurement Workflow Status</h2>
-              <p>Track your produce through mandatory verification and weighing stages.</p>
+              <p>
+                Track your produce through mandatory verification and weighing
+                stages.
+              </p>
             </div>
             <button class="back-to-dash-btn">
               <i class="fa-solid fa-arrow-left"></i> Dashboard
@@ -971,12 +1195,16 @@
             <!-- 7-Stage Horizontal Stepper -->
             <div class="lifecycle-stepper" id="lifecycleStepper">
               <div class="step-node active" data-stage="BOOKED">
-                <div class="node-circle"><i class="fa-solid fa-ticket"></i></div>
+                <div class="node-circle">
+                  <i class="fa-solid fa-ticket"></i>
+                </div>
                 <span>Booked</span>
               </div>
               <div class="step-connector"></div>
               <div class="step-node" data-stage="CHECKED_IN">
-                <div class="node-circle"><i class="fa-solid fa-id-card"></i></div>
+                <div class="node-circle">
+                  <i class="fa-solid fa-id-card"></i>
+                </div>
                 <span>Checked-In</span>
               </div>
               <div class="step-connector"></div>
@@ -991,17 +1219,23 @@
               </div>
               <div class="step-connector"></div>
               <div class="step-node" data-stage="QUALITY_CHECK">
-                <div class="node-circle"><i class="fa-solid fa-vial-circle-check"></i></div>
+                <div class="node-circle">
+                  <i class="fa-solid fa-vial-circle-check"></i>
+                </div>
                 <span>Quality Check</span>
               </div>
               <div class="step-connector"></div>
               <div class="step-node" data-stage="WEIGHING">
-                <div class="node-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+                <div class="node-circle">
+                  <i class="fa-solid fa-scale-balanced"></i>
+                </div>
                 <span>Weighing</span>
               </div>
               <div class="step-connector"></div>
               <div class="step-node" data-stage="COMPLETED">
-                <div class="node-circle"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="node-circle">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
                 <span>Completed</span>
               </div>
             </div>
@@ -1009,10 +1243,15 @@
             <!-- Current Stage Description Box -->
             <div class="current-stage-callout">
               <div class="callout-top">
-                <span class="stage-tag" id="procurementStatusBadge">BOOKED</span>
+                <span class="stage-tag" id="procurementStatusBadge"
+                  >BOOKED</span
+                >
                 <h3 id="procurementStageText">Slot Booked Successfully</h3>
               </div>
-              <p id="procurementStageDesc">Your procurement slot is confirmed in the centralized system. Please arrive on time.</p>
+              <p id="procurementStageDesc">
+                Your procurement slot is confirmed in the centralized system.
+                Please arrive on time.
+              </p>
             </div>
 
             <div class="procurement-actions-row">
@@ -1036,7 +1275,10 @@
           <div class="panel-header">
             <div>
               <h2>Direct Benefit Transfer (DBT) Payments</h2>
-              <p>Transparent government MSP payouts credited straight to your bank account.</p>
+              <p>
+                Transparent government MSP payouts credited straight to your
+                bank account.
+              </p>
             </div>
             <button class="back-to-dash-btn">
               <i class="fa-solid fa-arrow-left"></i> Dashboard
@@ -1046,10 +1288,17 @@
           <div class="payments-split-grid">
             <div class="card payment-summary-card">
               <span class="payment-card-sub">Total Disbursed / Due</span>
-              <div class="big-rupee-display" id="paymentAmountDisplay">₹1,138</div>
+              <div class="big-rupee-display" id="paymentAmountDisplay">
+                ₹1,138
+              </div>
 
-              <div class="payment-badge-status" id="paymentStatusBadge">PENDING</div>
-              <p class="payment-notes" id="paymentStatusDesc">Funds will be credited via PFMS directly to your linked bank account after weighing.</p>
+              <div class="payment-badge-status" id="paymentStatusBadge">
+                PENDING
+              </div>
+              <p class="payment-notes" id="paymentStatusDesc">
+                Funds will be credited via PFMS directly to your linked bank
+                account after weighing.
+              </p>
 
               <div class="payment-metrics-block">
                 <div class="metric-item">
@@ -1093,7 +1342,9 @@
                 </div>
                 <div class="bank-row">
                   <span>Aadhaar Seeding</span>
-                  <span class="seed-badge"><i class="fa-solid fa-check"></i> NPCI Linked</span>
+                  <span class="seed-badge"
+                    ><i class="fa-solid fa-check"></i> NPCI Linked</span
+                  >
                 </div>
               </div>
             </div>
@@ -1107,7 +1358,9 @@
           <div class="panel-header">
             <div>
               <h2>Notifications & Advisories</h2>
-              <p>Official announcements, queue movements, and weather updates.</p>
+              <p>
+                Official announcements, queue movements, and weather updates.
+              </p>
             </div>
             <button class="back-to-dash-btn">
               <i class="fa-solid fa-arrow-left"></i> Dashboard
@@ -1118,7 +1371,9 @@
             <div class="notifications-filters">
               <button class="filter-pill active" data-filter="all">All</button>
               <button class="filter-pill" data-filter="queue">Queue</button>
-              <button class="filter-pill" data-filter="payments">Payments</button>
+              <button class="filter-pill" data-filter="payments">
+                Payments
+              </button>
             </div>
 
             <div class="full-notifications-list" id="fullNotifList">
@@ -1134,7 +1389,10 @@
           <div class="panel-header">
             <div>
               <h2>Help & Kisan Support Helpline</h2>
-              <p>24x7 farmer assistance for procurement, mandi procedures, and technical queries.</p>
+              <p>
+                24x7 farmer assistance for procurement, mandi procedures, and
+                technical queries.
+              </p>
             </div>
             <button class="back-to-dash-btn">
               <i class="fa-solid fa-arrow-left"></i> Dashboard
@@ -1166,16 +1424,29 @@
               <h3>Frequently Asked Questions</h3>
               <div class="faq-list">
                 <details class="faq-item" open>
-                  <summary>How do I know my token position in the queue?</summary>
-                  <p>Your token and the number of farmers ahead of you update in real time on the Dashboard and "My Turn" section.</p>
+                  <summary>
+                    How do I know my token position in the queue?
+                  </summary>
+                  <p>
+                    Your token and the number of farmers ahead of you update in
+                    real time on the Dashboard and "My Turn" section.
+                  </p>
                 </details>
                 <details class="faq-item">
                   <summary>When will I receive my produce payment?</summary>
-                  <p>Once your produce completes Quality Check and Weighing, payment is triggered via PFMS directly to your bank account within 24 to 48 hours.</p>
+                  <p>
+                    Once your produce completes Quality Check and Weighing,
+                    payment is triggered via PFMS directly to your bank account
+                    within 24 to 48 hours.
+                  </p>
                 </details>
                 <details class="faq-item">
                   <summary>What if I am running late for my time slot?</summary>
-                  <p>KisanQueue reserves your token order; if you arrive later than the slot, you will be placed at the nearest available opening without losing your registration.</p>
+                  <p>
+                    KisanQueue reserves your token order; if you arrive later
+                    than the slot, you will be placed at the nearest available
+                    opening without losing your registration.
+                  </p>
                 </details>
               </div>
             </div>
@@ -1192,7 +1463,10 @@
                 <i class="fa-solid fa-check"></i>
               </div>
               <h2>Booking Confirmed Successfully!</h2>
-              <p class="receipt-sub">Your appointment has been registered at the centralized procurement server.</p>
+              <p class="receipt-sub">
+                Your appointment has been registered at the centralized
+                procurement server.
+              </p>
 
               <div class="receipt-token-badge">
                 <span>YOUR TOKEN NUMBER</span>
@@ -1247,18 +1521,28 @@
     <!-- 1. VOICE ASSISTANT MODAL -->
     <div class="modal-backdrop hidden" id="voiceModal">
       <div class="modal-box voice-modal-box">
-        <button class="modal-close" id="closeVoiceModal"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close" id="closeVoiceModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
         <div class="voice-wave-circle active">
           <i class="fa-solid fa-microphone"></i>
         </div>
         <h3>Voice Assistant</h3>
         <p id="voiceStatusText">Listening... Please speak your command.</p>
-        <div class="voice-transcript-box" id="voiceTranscript">"Tap below or speak: 'Show my turn', 'Book slot', 'Show payments'..."</div>
+        <div class="voice-transcript-box" id="voiceTranscript">
+          "Tap below or speak: 'Show my turn', 'Book slot', 'Show payments'..."
+        </div>
         <div class="voice-hints">
-          <button class="voice-hint-chip" data-cmd="dashboard">"Go to dashboard"</button>
-          <button class="voice-hint-chip" data-cmd="turn">"Show my turn"</button>
+          <button class="voice-hint-chip" data-cmd="dashboard">
+            "Go to dashboard"
+          </button>
+          <button class="voice-hint-chip" data-cmd="turn">
+            "Show my turn"
+          </button>
           <button class="voice-hint-chip" data-cmd="book">"Book a slot"</button>
-          <button class="voice-hint-chip" data-cmd="payments">"Show payments"</button>
+          <button class="voice-hint-chip" data-cmd="payments">
+            "Show payments"
+          </button>
         </div>
       </div>
     </div>
@@ -1266,26 +1550,43 @@
     <!-- 2. VIEW ROUTE MAP MODAL -->
     <div class="modal-backdrop hidden" id="routeModal">
       <div class="modal-box route-modal-box">
-        <button class="modal-close" id="closeRouteModal"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close" id="closeRouteModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
         <h3>Route to Procurement Centre</h3>
-        <p class="modal-sub">Fastest route from your village to <strong id="routeCentreName">Centre A, Bhagalpur</strong></p>
+        <p class="modal-sub">
+          Fastest route from your village to
+          <strong id="routeCentreName">Centre A, Bhagalpur</strong>
+        </p>
 
         <!-- Mock Navigation Map Visual -->
         <div class="mock-map-canvas">
           <div class="map-path-line"></div>
-          <div class="map-pin start-pin"><i class="fa-solid fa-house"></i> <span>Village</span></div>
-          <div class="map-pin car-pin"><i class="fa-solid fa-car-side"></i></div>
-          <div class="map-pin end-pin"><i class="fa-solid fa-location-dot"></i> <span>Centre A</span></div>
+          <div class="map-pin start-pin">
+            <i class="fa-solid fa-house"></i> <span>Village</span>
+          </div>
+          <div class="map-pin car-pin">
+            <i class="fa-solid fa-car-side"></i>
+          </div>
+          <div class="map-pin end-pin">
+            <i class="fa-solid fa-location-dot"></i> <span>Centre A</span>
+          </div>
         </div>
 
         <div class="route-metrics-grid">
           <div><span>Distance</span><strong>4.8 km</strong></div>
           <div><span>Travel Time</span><strong>18 mins</strong></div>
-          <div><span>Traffic</span><strong style="color:#079447;">Clear</strong></div>
+          <div>
+            <span>Traffic</span><strong style="color: #079447">Clear</strong>
+          </div>
           <div><span>Recommended Departure</span><strong>10:50 AM</strong></div>
         </div>
 
-        <button class="primary-green-btn" id="openGoogleMapsBtn" style="margin-top:16px;">
+        <button
+          class="primary-green-btn"
+          id="openGoogleMapsBtn"
+          style="margin-top: 16px"
+        >
           <i class="fa-solid fa-map-location-dot"></i> Open in Maps App
         </button>
       </div>
@@ -1294,11 +1595,16 @@
     <!-- 3. CHANGE CENTRE MODAL -->
     <div class="modal-backdrop hidden" id="centreModal">
       <div class="modal-box">
-        <button class="modal-close" id="closeCentreModal"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close" id="closeCentreModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
         <h3>Select Procurement Centre</h3>
         <p class="modal-sub">Choose a government procurement hub near you:</p>
         <div class="centre-picker-list">
-          <button class="centre-option active" data-centre="Centre A, Bhagalpur">
+          <button
+            class="centre-option active"
+            data-centre="Centre A, Bhagalpur"
+          >
             <div>
               <strong>Centre A, Bhagalpur</strong>
               <span>Main Agricultural Mandi (Distance: 4.8 km)</span>
@@ -1326,16 +1632,24 @@
     <!-- 4. FARMER PROFILE / LOGOUT MODAL -->
     <div class="modal-backdrop hidden" id="profileModal">
       <div class="modal-box profile-modal-box">
-        <button class="modal-close" id="closeProfileModal"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close" id="closeProfileModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
         <div class="profile-large-avatar">
           <i class="fa-solid fa-user-check"></i>
         </div>
         <h3 id="modalFarmerName">Ramesh Kumar</h3>
         <p id="modalFarmerId">Farmer ID: F1001</p>
         <div class="modal-profile-list">
-          <div><span>Mobile:</span> <strong id="modalFarmerMobile">98765 43210</strong></div>
+          <div>
+            <span>Mobile:</span>
+            <strong id="modalFarmerMobile">98765 43210</strong>
+          </div>
           <div><span>Location:</span> <strong>Bhagalpur, Bihar</strong></div>
-          <div><span>Status:</span> <strong style="color:#079447;">Active & Verified</strong></div>
+          <div>
+            <span>Status:</span>
+            <strong style="color: #079447">Active & Verified</strong>
+          </div>
         </div>
         <button class="logout-red-btn" id="logoutBtn">
           <i class="fa-solid fa-right-from-bracket"></i> Logout
@@ -1346,9 +1660,14 @@
     <!-- 5. GENERAL ACTION MODAL (Call / Message / Other Farmers / Learn More) -->
     <div class="modal-backdrop hidden" id="actionModal">
       <div class="modal-box">
-        <button class="modal-close" id="closeActionModal"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close" id="closeActionModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
         <h3 id="actionModalTitle">Information</h3>
-        <div id="actionModalBody" style="margin-top:14px; line-height:1.6; color:#4a5568;"></div>
+        <div
+          id="actionModalBody"
+          style="margin-top: 14px; line-height: 1.6; color: #4a5568"
+        ></div>
       </div>
     </div>
 
