@@ -6,7 +6,13 @@ require("dotenv").config();
 const app = express();
 
 // IMPORTANT: Allow frontend to connect
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 app.use(express.json());
 
 // Test route
@@ -15,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 // IMPORTANT: Connect your routes
+app.use("/api/farmers", require("./routes/farmerRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api/queue", require("./routes/queueRoutes"));
 app.use("/api/procurement", require("./routes/procurementRoutes"));
