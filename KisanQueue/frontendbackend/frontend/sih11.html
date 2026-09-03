@@ -19,7 +19,7 @@
 
   <body>
     <!-- =====================================================
-     LOGIN PAGE
+     LOGIN PAGE (PRESERVED - 100% UNTOUCHED)
 ===================================================== -->
 
     <section id="loginPage" class="login-page">
@@ -167,940 +167,1072 @@
     </section>
 
     <!-- =====================================================
-     DASHBOARD
+     UPGRADED DASHBOARD (BASED ON REFERENCE DESIGN IMAGE)
 ===================================================== -->
 
     <section id="dashboardPage" class="dashboard-page">
       <!-- =================================================
          SIDEBAR
-    ================================================= -->
-
+      ================================================= -->
       <aside class="sidebar" id="sidebar">
-        <!-- LOGO -->
-
-        <div class="sidebar-logo">
-          <div class="logo-leaf">
+        <!-- BRAND LOGO -->
+        <div class="sidebar-brand">
+          <div class="brand-logo-icon">
             <i class="fa-solid fa-leaf"></i>
           </div>
-
-          <div>
+          <div class="brand-titles">
             <h2>Kisan<span>Queue</span></h2>
-
-            <p>Smart Procurement System</p>
+            <p>Smart Procurement for Farmers</p>
           </div>
         </div>
 
         <!-- NAVIGATION -->
-
-        <nav>
+        <nav class="sidebar-nav">
           <button class="nav-item active" data-page="dashboard">
             <i class="fa-solid fa-house"></i>
-
-            <span> Dashboard </span>
+            <span>Dashboard</span>
           </button>
 
           <button class="nav-item" data-page="book">
-            <i class="fa-regular fa-calendar"></i>
-
-            <span> Book Slot / Token </span>
+            <i class="fa-regular fa-calendar-plus"></i>
+            <span>Book Slot / Token</span>
           </button>
 
           <button class="nav-item" data-page="queue">
-            <i class="fa-solid fa-list-ol"></i>
-
-            <span> My Turn </span>
+            <i class="fa-solid fa-users"></i>
+            <span>My Turn</span>
           </button>
 
           <button class="nav-item" data-page="produce">
             <i class="fa-solid fa-wheat-awn"></i>
-
-            <span> My Produce </span>
+            <span>My Produce</span>
           </button>
 
           <button class="nav-item" data-page="procurement">
             <i class="fa-solid fa-clipboard-check"></i>
-
-            <span> Procurement Status </span>
+            <span>Procurement Status</span>
           </button>
 
           <button class="nav-item" data-page="payments">
-            <i class="fa-solid fa-indian-rupee-sign"></i>
-
-            <span> Payments </span>
+            <i class="fa-regular fa-credit-card"></i>
+            <span>Payments</span>
           </button>
 
           <button class="nav-item" data-page="notifications">
             <i class="fa-regular fa-bell"></i>
-
-            <span> Notifications </span>
+            <span>Notifications</span>
+            <span class="nav-badge" id="sidebarNotifBadge">3</span>
           </button>
 
-          <button class="nav-item">
+          <button class="nav-item sub-nav-item" data-page="voice" id="sidebarVoiceBtn">
             <i class="fa-solid fa-microphone"></i>
-
-            <span> Voice Assistant </span>
+            <div class="nav-label-stack">
+              <span>Voice Assistant</span>
+              <small>Tap to speak</small>
+            </div>
           </button>
 
-          <button class="nav-item">
-            <i class="fa-solid fa-circle-question"></i>
-
-            <span> Help & Support </span>
+          <button class="nav-item sub-nav-item" data-page="support">
+            <i class="fa-solid fa-headset"></i>
+            <div class="nav-label-stack">
+              <span>Help & Support</span>
+              <small>Get help</small>
+            </div>
           </button>
+
+          <!-- SIDEBAR LANGUAGE DROPDOWN -->
+          <div class="sidebar-lang-box">
+            <i class="fa-solid fa-globe"></i>
+            <div class="lang-info">
+              <span>Language</span>
+              <select id="sidebarLanguage">
+                <option value="English">English</option>
+                <option value="Hindi">हिन्दी</option>
+                <option value="Bengali">বাংলা</option>
+                <option value="Marathi">मराठी</option>
+                <option value="Telugu">తెలుగు</option>
+                <option value="Tamil">தமிழ்</option>
+                <option value="Gujarati">ગુજરાતી</option>
+                <option value="Kannada">ಕನ್ನಡ</option>
+                <option value="Malayalam">മലയാളം</option>
+                <option value="Punjabi">ਪੰਜਾਬੀ</option>
+                <option value="Odia">ଓଡ଼ିଆ</option>
+                <option value="Assamese">অসমীয়া</option>
+              </select>
+            </div>
+            <i class="fa-solid fa-chevron-down lang-chevron"></i>
+          </div>
         </nav>
 
-        <!-- SIDEBAR BOTTOM -->
-
-        <div class="sidebar-bottom">
-          <!-- LANGUAGE -->
-
-          <div class="sidebar-language">
-            <i class="fa-solid fa-globe"></i>
-
-            <select id="dashboardLanguage">
-              <option value="English">English</option>
-
-              <option value="Hindi">हिन्दी</option>
-
-              <option value="Bengali">বাংলা</option>
-
-              <option value="Marathi">मराठी</option>
-
-              <option value="Telugu">తెలుగు</option>
-
-              <option value="Tamil">தமிழ்</option>
-
-              <option value="Gujarati">ગુજરાતી</option>
-
-              <option value="Kannada">ಕನ್ನಡ</option>
-
-              <option value="Malayalam">മലയാളം</option>
-
-              <option value="Punjabi">ਪੰਜਾਬੀ</option>
-
-              <option value="Odia">ଓଡ଼ିଆ</option>
-
-              <option value="Assamese">অসমীয়া</option>
-            </select>
+        <!-- BOTTOM PROFILE CARD -->
+        <div class="sidebar-profile-card" id="sidebarFarmerCard" title="Click for Profile & Logout">
+          <div class="profile-avatar">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Farmer Avatar" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="avatar-fallback" style="display:none;"><i class="fa-solid fa-user"></i></div>
           </div>
-
-          <!-- FARMER PROFILE -->
-
-          <div class="sidebar-user">
-            <div class="sidebar-avatar">
-              <i class="fa-solid fa-user"></i>
-            </div>
-
-            <div>
-              <strong id="sidebarFarmerName"> Farmer </strong>
-
-              <span> Farmer </span>
-            </div>
+          <div class="profile-meta">
+            <strong id="sidebarFarmerName">Ramesh Kumar</strong>
+            <span id="sidebarFarmerMobile">98765 43210</span>
           </div>
+          <i class="fa-solid fa-chevron-right profile-arrow"></i>
+        </div>
 
-          <!-- LOGOUT -->
-
-          <button class="logout-btn" id="logoutBtn">
-            <i class="fa-solid fa-right-from-bracket"></i>
-
-            <span> Logout </span>
-          </button>
+        <!-- SIDEBAR AGRICULTURAL SCENERY ILLUSTRATION -->
+        <div class="sidebar-scenery-container">
+          <svg class="sidebar-scenery-svg" viewBox="0 0 270 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hillGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#bce3c5"/>
+                <stop offset="100%" stop-color="#9bd4a7"/>
+              </linearGradient>
+              <linearGradient id="hillGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#80c68d"/>
+                <stop offset="100%" stop-color="#46a058"/>
+              </linearGradient>
+              <linearGradient id="fieldStripes" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#2c893f"/>
+                <stop offset="100%" stop-color="#186b29"/>
+              </linearGradient>
+            </defs>
+            <!-- Background sky soft gradient -->
+            <rect width="270" height="110" fill="#e8f5ec"/>
+            <!-- Far hills -->
+            <path d="M0 70 Q 70 35 150 55 T 270 50 L 270 110 L 0 110 Z" fill="url(#hillGrad1)" opacity="0.8"/>
+            <!-- Trees on hills -->
+            <circle cx="150" cy="45" r="10" fill="#67ab73"/>
+            <circle cx="160" cy="42" r="14" fill="#4d9b5c"/>
+            <circle cx="172" cy="46" r="9" fill="#67ab73"/>
+            <rect x="159" y="52" width="3" height="12" fill="#5c4033"/>
+            <!-- Near rolling field -->
+            <path d="M0 65 Q 110 50 190 75 T 270 65 L 270 110 L 0 110 Z" fill="url(#hillGrad2)"/>
+            <!-- Crop furrows -->
+            <path d="M0 90 Q 90 70 200 95 L 270 90 L 270 110 L 0 110 Z" fill="url(#fieldStripes)"/>
+            <!-- Furrow lines -->
+            <line x1="20" y1="110" x2="90" y2="80" stroke="#3da050" stroke-width="2"/>
+            <line x1="60" y1="110" x2="130" y2="82" stroke="#3da050" stroke-width="2"/>
+            <line x1="110" y1="110" x2="165" y2="84" stroke="#3da050" stroke-width="2"/>
+            <line x1="160" y1="110" x2="200" y2="85" stroke="#3da050" stroke-width="2"/>
+            <!-- Green Tractor Vector -->
+            <g transform="translate(100, 58) scale(0.65)">
+              <!-- Tractor Body -->
+              <rect x="10" y="16" width="28" height="16" rx="3" fill="#1b8535"/>
+              <rect x="18" y="6" width="18" height="12" rx="2" fill="#2eb04f"/>
+              <!-- Cabin window -->
+              <rect x="22" y="8" width="12" height="7" rx="1" fill="#c3ebff"/>
+              <!-- Exhaust pipe -->
+              <rect x="12" y="2" width="2" height="14" fill="#333"/>
+              <!-- Big Rear Wheel -->
+              <circle cx="34" cy="30" r="12" fill="#2d3748"/>
+              <circle cx="34" cy="30" r="8" fill="#cbd5e1"/>
+              <circle cx="34" cy="30" r="3" fill="#2d3748"/>
+              <!-- Small Front Wheel -->
+              <circle cx="10" cy="34" r="7" fill="#2d3748"/>
+              <circle cx="10" cy="34" r="4" fill="#cbd5e1"/>
+              <circle cx="10" cy="34" r="2" fill="#2d3748"/>
+            </g>
+          </svg>
         </div>
       </aside>
 
       <!-- =================================================
-         MAIN CONTENT
-    ================================================= -->
-
+         MAIN CONTENT AREA
+      ================================================= -->
       <main class="main-content">
-        <!-- =================================================
-             TOP HEADER
-        ================================================= -->
-
+        <!-- TOP HEADER -->
         <header class="top-header">
           <div class="header-left">
-            <button class="mobile-menu" id="mobileMenu">
+            <button class="mobile-toggle-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
               <i class="fa-solid fa-bars"></i>
             </button>
-
-            <div class="header-title">
-              <h2 id="pageTitle">Dashboard</h2>
-
-              <p>Smart Procurement System</p>
+            <div class="greeting-box">
+              <h1 id="headerGreeting">Good Morning, <span id="headerFarmerName">Ramesh Kumar</span>! 👋</h1>
+              <p id="headerSubtitle">Today is your <span id="headerCropName">Wheat</span> procurement day.</p>
             </div>
           </div>
 
           <div class="header-right">
-            <div class="language-top">
+            <!-- LANGUAGE SELECTOR -->
+            <div class="header-pill lang-pill">
               <i class="fa-solid fa-globe"></i>
-
               <select id="topLanguage">
                 <option value="English">English</option>
-
                 <option value="Hindi">हिन्दी</option>
-
                 <option value="Bengali">বাংলা</option>
-
                 <option value="Marathi">मराठी</option>
-
                 <option value="Telugu">తెలుగు</option>
-
                 <option value="Tamil">தமிழ்</option>
-
                 <option value="Gujarati">ગુજરાતી</option>
-
                 <option value="Kannada">ಕನ್ನಡ</option>
-
                 <option value="Malayalam">മലയാളം</option>
-
                 <option value="Punjabi">ਪੰਜਾਬੀ</option>
-
                 <option value="Odia">ଓଡ଼ିଆ</option>
-
                 <option value="Assamese">অসমীয়া</option>
               </select>
+              <i class="fa-solid fa-chevron-down pill-chevron"></i>
             </div>
 
-            <button class="voice-btn">
+            <!-- VOICE BUTTON -->
+            <button class="header-pill voice-pill" id="headerVoiceBtn" title="Speak to Voice Assistant">
               <i class="fa-solid fa-microphone"></i>
-
-              <span> Voice </span>
+              <span>Voice</span>
             </button>
 
-            <div class="header-user">
-              <div>
-                <strong id="headerFarmerName"> Farmer </strong>
+            <!-- NOTIFICATION BUTTON -->
+            <button class="header-pill notif-pill" id="headerNotifBtn" title="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="notif-count" id="headerNotifBadge">3</span>
+            </button>
 
-                <span> Farmer </span>
-              </div>
-
-              <div class="header-avatar">
-                <i class="fa-solid fa-user"></i>
-              </div>
+            <!-- LIVE DATE & CLOCK -->
+            <div class="live-datetime-box">
+              <span class="live-date" id="liveDate">28 August 2026, Thursday</span>
+              <span class="live-clock">
+                <i class="fa-regular fa-clock"></i>
+                <strong id="liveTime">09:15 AM</strong>
+              </span>
             </div>
           </div>
         </header>
 
-        <!-- =================================================
-             DASHBOARD CONTENT
-        ================================================= -->
-
-        <div id="dashboardContent" class="page-content">
-          <!-- WELCOME -->
-
-          <div class="welcome-row">
-            <div>
-              <h1>
-                Welcome,
-                <span id="welcomeName"> Farmer </span>
-              </h1>
-
-              <p>Manage your procurement slots and track your queue.</p>
-            </div>
-
-            <button class="primary-btn" id="newSlotBtn">
-              <i class="fa-solid fa-plus"></i>
-
-              Book New Slot
-            </button>
+        <!-- CENTRE SELECTION STRIP -->
+        <div class="centre-strip">
+          <div class="centre-strip-left">
+            <i class="fa-solid fa-location-dot"></i>
+            <strong id="stripCentreName">Centre A, Bhagalpur</strong>
           </div>
-
-          <!-- DASHBOARD GRID -->
-
-          <div class="dashboard-grid">
-            <!-- CURRENT TOKEN -->
-
-            <div class="card turn-card">
-              <div class="card-heading">
-                <div>
-                  <span> Current Token </span>
-
-                  <h3 id="dashToken">A-018</h3>
-                </div>
-
-                <div class="icon-box">
-                  <i class="fa-solid fa-ticket"></i>
-                </div>
-              </div>
-
-              <p id="dashAhead">6 farmers ahead of you</p>
-
-              <div class="progress">
-                <div id="dashProgress"></div>
-              </div>
-
-              <div class="turn-bottom">
-                <span> Estimated Wait </span>
-
-                <strong id="dashWait"> 42 mins </strong>
-              </div>
-            </div>
-
-            <!-- NEXT SLOT -->
-
-            <div class="card next-card">
-              <div class="card-heading">
-                <div>
-                  <span> Next Slot </span>
-
-                  <h3 id="dashSlotDate">Today</h3>
-                </div>
-
-                <div class="icon-box">
-                  <i class="fa-regular fa-calendar"></i>
-                </div>
-              </div>
-
-              <strong class="slot-time" id="dashSlotTime"> 10:00 - 11:00 AM </strong>
-
-              <p id="dashSlotCentre">Centre A, Bhagalpur</p>
-            </div>
-
-            <!-- SMART CARD -->
-
-            <div class="card smart-card">
-              <div class="smart-icon">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-              </div>
-
-              <h3>Smart Procurement</h3>
-
-              <p>Avoid long queues by booking your slot in advance.</p>
-            </div>
-          </div>
-
-          <!-- QUICK ACTIONS -->
-
-          <div class="section-heading">
-            <h2>Quick Actions</h2>
-          </div>
-
-          <div class="quick-actions">
-            <button class="quick-action" data-page="book">
-              <i class="fa-regular fa-calendar"></i>
-
-              <span> Book Slot </span>
-            </button>
-
-            <button class="quick-action" data-page="queue">
-              <i class="fa-solid fa-list-ol"></i>
-
-              <span> My Turn </span>
-            </button>
-
-            <button class="quick-action" data-page="produce">
-              <i class="fa-solid fa-wheat-awn"></i>
-
-              <span> My Produce </span>
-            </button>
-
-            <button class="quick-action" data-page="payments">
-              <i class="fa-solid fa-money-bill-wave"></i>
-
-              <span> Payments </span>
-            </button>
-          </div>
-
-          <!-- BOTTOM GRID -->
-
-          <div class="bottom-grid">
-            <div class="card info-card">
-              <h3>Procurement Updates</h3>
-
-              <div class="update-item">
-                <i class="fa-solid fa-circle-check"></i>
-
-                <div>
-                  <strong> Wheat procurement is active </strong>
-
-                  <span> You can book a slot today. </span>
-                </div>
-              </div>
-
-              <div class="update-item">
-                <i class="fa-solid fa-circle-info"></i>
-
-                <div>
-                  <strong> Carry your Aadhaar card </strong>
-
-                  <span> Required during verification. </span>
-                </div>
-              </div>
-            </div>
-
-            <div class="card info-card">
-              <h3>Important Information</h3>
-
-              <div class="info-list">
-                <p>
-                  <i class="fa-solid fa-check"></i>
-                  Reach centre 10 minutes before slot.
-                </p>
-
-                <p>
-                  <i class="fa-solid fa-check"></i>
-                  Keep produce ready for weighing.
-                </p>
-
-                <p>
-                  <i class="fa-solid fa-check"></i>
-                  Carry required documents.
-                </p>
-              </div>
-            </div>
-          </div>
+          <button class="centre-change-btn" id="changeCentreBtn">Change Centre</button>
         </div>
 
         <!-- =================================================
-             BOOK SLOT
+           PAGE 1: MAIN DASHBOARD VIEW
         ================================================= -->
-
-        <div id="bookContent" class="page-content hidden">
-          <div class="page-heading">
-            <div>
-              <h1>Book Slot / Token</h1>
-
-              <p>Select your procurement centre and preferred time.</p>
-            </div>
-
-            <button class="back-btn" id="backDashboard">
-              <i class="fa-solid fa-arrow-left"></i>
-
-              Dashboard
-            </button>
-          </div>
-
-          <div class="booking-layout">
-            <!-- BOOKING FORM -->
-
-            <div class="card booking-form">
-              <h3>Book New Procurement Slot</h3>
-
-              <div class="form-grid">
-                <div class="field">
-                  <label> Select Centre </label>
-
-                  <select id="bookingCentreSelect">
-                    <option value="Centre A, Bhagalpur">Centre A, Bhagalpur</option>
-
-                    <option value="Centre B, Sabour">Centre B, Sabour</option>
-
-                    <option value="Centre C, Nathnagar">Centre C, Nathnagar</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label> Select Crop </label>
-
-                  <select id="bookingCropSelect">
-                    <option value="Wheat">Wheat</option>
-
-                    <option value="Rice">Rice</option>
-
-                    <option value="Maize">Maize</option>
-                  </select>
-                </div>
-
-                <div class="field">
-                  <label> Quantity </label>
-
-                  <input type="number" id="bookingQuantityInput" placeholder="Enter quantity in kg" />
-                </div>
-
-                <div class="field">
-                  <label> Select Date </label>
-
-                  <input type="date" id="bookingDateInput" />
-                </div>
+        <div id="dashboardContent" class="page-content">
+          <!-- TOP ROW: 3 MAJOR CARDS (MATCHING REFERENCE SCREENSHOT) -->
+          <div class="top-cards-grid">
+            <!-- CARD 1: YOUR TURN STATUS -->
+            <div class="card turn-status-card">
+              <div class="card-top-bar">
+                <span class="card-label">YOUR TURN STATUS</span>
+                <span class="live-update-badge">
+                  <span class="pulse-dot"></span> Live Update
+                </span>
               </div>
 
-              <h4>Available Time Slots</h4>
-
-              <div class="time-slots">
-                <button>09:00 - 10:00 AM</button>
-
-                <button class="selected">10:00 - 11:00 AM</button>
-
-                <button>11:00 - 12:00 PM</button>
-
-                <button>12:00 - 01:00 PM</button>
-
-                <button>02:00 - 03:00 PM</button>
-
-                <button>03:00 - 04:00 PM</button>
+              <div class="token-display-box">
+                <div class="token-big-val" id="dashToken">A-018</div>
               </div>
 
-              <button class="confirm-btn" id="confirmSlotBtn">
-                <i class="fa-solid fa-calendar-check"></i>
+              <div class="ahead-status-line">
+                <i class="fa-solid fa-user-group"></i>
+                <strong id="dashAhead">6 farmers ahead of you</strong>
+              </div>
 
-                Confirm Slot
+              <div class="wait-status-line">
+                <i class="fa-regular fa-clock"></i>
+                <span>Estimated wait time</span>
+                <strong id="dashWait">42 mins</strong>
+              </div>
+
+              <!-- SEGMENTED PROGRESS BAR -->
+              <div class="segmented-progress-bar" id="dashSegmentedBar">
+                <div class="segment filled"></div>
+                <div class="segment filled"></div>
+                <div class="segment filled"></div>
+                <div class="segment filled"></div>
+                <div class="segment filled"></div>
+                <div class="segment empty"></div>
+                <div class="segment empty"></div>
+                <div class="segment empty"></div>
+              </div>
+
+              <!-- NOTIFICATION ADVISORY BOX -->
+              <div class="advisory-box yellow-advisory">
+                <i class="fa-regular fa-bell"></i>
+                <span>We will notify you <strong id="dashNotifyThreshold">5 farmers</strong> before your turn.</span>
+              </div>
+
+              <!-- LISTEN TO UPDATE BUTTON -->
+              <button class="listen-update-btn" id="listenUpdateBtn">
+                <i class="fa-solid fa-volume-high"></i>
+                <span>Listen to Update</span>
               </button>
             </div>
 
-            <!-- BOOKING INFO -->
-
-            <div class="card booking-info">
-              <h3>Booking Information</h3>
-
-              <div class="info-item">
-                <i class="fa-solid fa-location-dot"></i>
-
-                <div>
-                  <strong> Centre A </strong>
-
-                  <span> Bhagalpur </span>
+            <!-- CARD 2: WHEN SHOULD I LEAVE? -->
+            <div class="card leave-card">
+              <div class="card-top-bar">
+                <span class="card-label">WHEN SHOULD I LEAVE?</span>
+                <div class="leave-icon-art">
+                  <i class="fa-solid fa-car-side"></i>
+                  <i class="fa-solid fa-tree"></i>
                 </div>
               </div>
 
-              <div class="info-item">
-                <i class="fa-solid fa-wheat-awn"></i>
+              <div class="leave-target-box">
+                <span class="target-sub">You should leave at</span>
+                <div class="target-time" id="dashLeaveTime">10:50 AM</div>
+                <span class="target-sub">to reach on time</span>
+              </div>
 
-                <div>
-                  <strong> Wheat </strong>
+              <div class="travel-metrics-list">
+                <div class="metric-row">
+                  <span class="metric-name">
+                    <i class="fa-solid fa-location-dot"></i> Distance to Centre
+                  </span>
+                  <strong class="metric-val" id="dashDistance">4.8 km</strong>
+                </div>
 
-                  <span> Current procurement </span>
+                <div class="metric-row">
+                  <span class="metric-name">
+                    <i class="fa-solid fa-car-side"></i> Travel Time
+                  </span>
+                  <strong class="metric-val" id="dashTravelTime">18 mins</strong>
+                </div>
+
+                <div class="metric-row">
+                  <span class="metric-name">
+                    <i class="fa-regular fa-clock"></i> Queue Buffer
+                  </span>
+                  <strong class="metric-val" id="dashBuffer">10 mins</strong>
                 </div>
               </div>
 
-              <div class="info-item">
-                <i class="fa-regular fa-clock"></i>
+              <div class="arrival-recommendation">
+                <span>Recommended arrival</span>
+                <strong id="dashArrivalTime">11:20 AM</strong>
+              </div>
 
-                <div>
-                  <strong> Expected Queue </strong>
+              <button class="view-route-btn" id="viewRouteBtn">
+                <i class="fa-solid fa-location-arrow"></i>
+                <span>View Route</span>
+              </button>
+            </div>
 
-                  <span> 42 minutes </span>
+            <!-- COLUMN 3: STACKED CARDS -->
+            <div class="stacked-cards-col">
+              <!-- CARD 3A: TODAY'S NEXT STEP -->
+              <div class="card next-step-card">
+                <div class="card-top-bar">
+                  <span class="card-label">TODAY'S NEXT STEP</span>
+                  <i class="fa-solid fa-wheat-awn sprout-icon"></i>
+                </div>
+
+                <div class="step-card-body">
+                  <div class="step-badge-circle">
+                    <i class="fa-solid fa-wheat-awn"></i>
+                  </div>
+                  <div class="step-info-text">
+                    <p>After reaching the centre, you will go for <strong id="dashNextStageName">Quality Check</strong> for <span id="dashNextCrop">Wheat</span>.</p>
+                  </div>
+                </div>
+
+                <button class="step-action-link" id="viewFullProcessBtn">
+                  <span>View Full Process</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+
+              <!-- CARD 3B: SMART WAIT -->
+              <div class="card smart-wait-card">
+                <div class="card-top-bar">
+                  <span class="card-label">SMART WAIT</span>
+                  <span class="wait-emoji">😌</span>
+                </div>
+
+                <div class="smart-wait-body">
+                  <span class="smart-sub">Your expected turn around</span>
+                  <div class="smart-turn-time" id="dashExpectedTurnTime">11:32 AM</div>
+                  <p class="smart-description">The queue is slow right now. You can comfortably stay at home.</p>
+
+                  <div class="smart-reminder-pill">
+                    <i class="fa-regular fa-bell"></i>
+                    <span>We will remind you to leave at <strong id="dashRemindAtTime">10:50 AM</strong>.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MIDDLE ROW: QUICK ACTIONS & NOTICE BANNER -->
+          <div class="middle-row-grid">
+            <!-- QUICK ACTIONS (4 TILES) -->
+            <div class="quick-actions-container">
+              <h3 class="section-title">QUICK ACTIONS</h3>
+              <div class="quick-action-tiles">
+                <button class="qa-tile" id="qaCallCentre">
+                  <div class="qa-icon-circle green">
+                    <i class="fa-solid fa-phone"></i>
+                  </div>
+                  <div class="qa-texts">
+                    <strong>Call Centre</strong>
+                    <small>Call for Support</small>
+                  </div>
+                </button>
+
+                <button class="qa-tile" id="qaMessageCentre">
+                  <div class="qa-icon-circle orange">
+                    <i class="fa-solid fa-message"></i>
+                  </div>
+                  <div class="qa-texts">
+                    <strong>Message Centre</strong>
+                    <small>Send Message</small>
+                  </div>
+                </button>
+
+                <button class="qa-tile" id="qaOtherFarmers">
+                  <div class="qa-icon-circle blue">
+                    <i class="fa-solid fa-users"></i>
+                  </div>
+                  <div class="qa-texts">
+                    <strong>Other Farmers</strong>
+                    <small>Talk to Farmers</small>
+                  </div>
+                </button>
+
+                <button class="qa-tile" id="qaLearnMore">
+                  <div class="qa-icon-circle purple">
+                    <i class="fa-solid fa-book-open"></i>
+                  </div>
+                  <div class="qa-texts">
+                    <strong>Learn More</strong>
+                    <small>Guide & Info</small>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- NOTICE BANNER -->
+            <div class="notice-banner-card">
+              <div class="notice-icon-circle">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+              <div class="notice-content">
+                <strong id="noticeBannerTitle">Centre A is very busy today.</strong>
+                <p id="noticeBannerDesc">Your wait time may be longer than usual.</p>
+              </div>
+              <button class="notice-action-btn" id="noticeOtherCentresBtn">
+                <span>Check Other Centres</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- BOTTOM ROW: RECENT NOTIFICATIONS & LIVE QUEUE TRACK -->
+          <div class="bottom-row-grid">
+            <!-- RECENT NOTIFICATIONS -->
+            <div class="card recent-notifications-card">
+              <h3 class="section-title">RECENT NOTIFICATIONS</h3>
+              <div class="notifications-stream" id="recentNotifStream">
+                <!-- Notification 1 -->
+                <div class="stream-item">
+                  <div class="stream-icon yellow">
+                    <i class="fa-solid fa-bell"></i>
+                  </div>
+                  <div class="stream-body">
+                    <strong class="stream-title">Your turn is approaching. (<span id="notifTokenVal">A-018</span>)</strong>
+                    <span class="stream-desc">We will notify you when 5 farmers are ahead of you.</span>
+                  </div>
+                  <span class="stream-time">2 mins ago</span>
+                </div>
+
+                <!-- Notification 2 -->
+                <div class="stream-item">
+                  <div class="stream-icon blue">
+                    <i class="fa-solid fa-calendar-check"></i>
+                  </div>
+                  <div class="stream-body">
+                    <strong class="stream-title">Slot booked successfully for <span id="notifSlotDate">28 Aug 2026 (10:00 AM - 11:00 AM)</span></strong>
+                    <span class="stream-desc" id="notifCentreName">Centre A, Bhagalpur</span>
+                  </div>
+                  <span class="stream-time">15 mins ago</span>
+                </div>
+
+                <!-- Notification 3 -->
+                <div class="stream-item">
+                  <div class="stream-icon gold">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                  </div>
+                  <div class="stream-body">
+                    <strong class="stream-title">Payment of <span id="notifPaymentVal">₹9,240</span> initiated.</strong>
+                    <span class="stream-desc">It will be credited within 24 hours.</span>
+                  </div>
+                  <span class="stream-time">1 day ago</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- LIVE QUEUE AT CENTRE -->
+            <div class="card live-queue-card">
+              <div class="live-queue-header">
+                <h3 class="section-title">LIVE QUEUE AT <span id="lqCentreHeader">CENTRE A</span></h3>
+                <button class="view-full-queue-link" id="viewFullQueueBtn">View Full Queue</button>
+              </div>
+
+              <!-- 3-COL STATS BOX -->
+              <div class="queue-stats-trio">
+                <div class="stat-col">
+                  <span class="stat-label">Now Serving</span>
+                  <strong class="stat-val" id="lqNowServing">A-012</strong>
+                  <small class="stat-sub" id="lqCurrentFarmerName">Mahendra Singh</small>
+                </div>
+
+                <div class="stat-col">
+                  <span class="stat-label">Farmers Ahead</span>
+                  <strong class="stat-val" id="lqFarmersAhead">6</strong>
+                </div>
+
+                <div class="stat-col">
+                  <span class="stat-label">Estimated Wait</span>
+                  <strong class="stat-val" id="lqEstimatedWait">42 mins</strong>
                 </div>
               </div>
 
-              <div class="booking-note">
-                <i class="fa-solid fa-circle-info"></i>
-
-                Please reach the centre 10 minutes before your selected slot.
+              <!-- VISUAL QUEUE PROGRESS TIMELINE WITH AVATARS -->
+              <div class="queue-timeline-wrapper">
+                <span class="timeline-title">Queue Progress</span>
+                <div class="queue-avatars-track" id="queueAvatarsTrack">
+                  <!-- Generated dynamically via sih11.js -->
+                </div>
+                <div class="track-ends">
+                  <span id="trackStartToken">A-001</span>
+                  <span id="trackEndToken">A-024</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- =================================================
-             BOOKING CONFIRMATION
+           PAGE 2: BOOK SLOT / TOKEN
         ================================================= -->
-
-        <div id="confirmationContent" class="page-content hidden">
-          <div class="page-heading confirmation-heading">
+        <div id="bookContent" class="page-content hidden">
+          <div class="panel-header">
             <div>
-              <h1>Booking Confirmed</h1>
-
-              <p>Your procurement slot has been successfully confirmed.</p>
+              <h2>Book Procurement Slot / Token</h2>
+              <p>Select your preferred centre, crop, and time slot for direct mandi entry.</p>
             </div>
+            <button class="back-to-dash-btn">
+              <i class="fa-solid fa-arrow-left"></i> Dashboard
+            </button>
           </div>
 
-          <div class="confirmation-layout">
-            <div class="card confirmation-card">
-              <div class="confirmation-success-icon">
+          <div class="booking-split-layout">
+            <!-- Form Card -->
+            <div class="card booking-inputs-card">
+              <h3>Enter Produce & Slot Details</h3>
+
+              <div class="input-field-group">
+                <label>Select Procurement Centre</label>
+                <select id="bookingCentreSelect" class="styled-select">
+                  <option value="Centre A, Bhagalpur">Centre A, Bhagalpur (Primary Mandi)</option>
+                  <option value="Centre B, Sabour">Centre B, Sabour (Buffer Warehouse)</option>
+                  <option value="Centre C, Nathnagar">Centre C, Nathnagar (Cooperative Center)</option>
+                </select>
+              </div>
+
+              <div class="input-field-group">
+                <label>Select Crop</label>
+                <div class="crop-choice-chips">
+                  <button type="button" class="crop-chip selected" data-crop="Wheat">
+                    <i class="fa-solid fa-wheat-awn"></i> Wheat
+                  </button>
+                  <button type="button" class="crop-chip" data-crop="Rice">
+                    <i class="fa-solid fa-seedling"></i> Rice / Paddy
+                  </button>
+                  <button type="button" class="crop-chip" data-crop="Maize">
+                    <i class="fa-solid fa-cubes-stacked"></i> Maize
+                  </button>
+                </div>
+                <input type="hidden" id="bookingCropSelect" value="Wheat" />
+              </div>
+
+              <div class="grid-two-fields">
+                <div class="input-field-group">
+                  <label>Quantity (in kg)</label>
+                  <div class="styled-input-wrapper">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                    <input type="number" id="bookingQuantityInput" placeholder="e.g. 50" min="1" max="10000" value="50" />
+                  </div>
+                </div>
+
+                <div class="input-field-group">
+                  <label>Procurement Date</label>
+                  <div class="styled-input-wrapper">
+                    <i class="fa-regular fa-calendar"></i>
+                    <input type="date" id="bookingDateInput" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-field-group">
+                <label>Available Time Slots</label>
+                <div class="time-slots-grid">
+                  <button type="button" class="time-slot-btn">09:00 - 10:00 AM</button>
+                  <button type="button" class="time-slot-btn selected">10:00 - 11:00 AM</button>
+                  <button type="button" class="time-slot-btn">11:00 - 12:00 PM</button>
+                  <button type="button" class="time-slot-btn">12:00 - 01:00 PM</button>
+                  <button type="button" class="time-slot-btn">02:00 - 03:00 PM</button>
+                  <button type="button" class="time-slot-btn">03:00 - 04:00 PM</button>
+                </div>
+              </div>
+
+              <button class="confirm-slot-btn" id="confirmSlotBtn">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Confirm Slot & Generate Token</span>
+              </button>
+            </div>
+
+            <!-- Booking Summary Card -->
+            <div class="card booking-summary-card">
+              <h3>Booking Guidelines</h3>
+              <div class="summary-points-list">
+                <div class="point-item">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <div>
+                    <strong>Government Minimum Support Price (MSP)</strong>
+                    <p>Direct electronic bank settlement guaranteed within 24-48 hours of quality approval.</p>
+                  </div>
+                </div>
+
+                <div class="point-item">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  <div>
+                    <strong>Punctual Arrival</strong>
+                    <p>Please reach 10 minutes prior to your designated slot to complete security gate entry.</p>
+                  </div>
+                </div>
+
+                <div class="point-item">
+                  <i class="fa-solid fa-id-card"></i>
+                  <div>
+                    <strong>Documents to Carry</strong>
+                    <p>Carry your Aadhaar card and bank passbook/account verification copy.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+           PAGE 3: MY TURN / LIVE QUEUE
+        ================================================= -->
+        <div id="queueContent" class="page-content hidden">
+          <div class="panel-header">
+            <div>
+              <h2>Live Queue Tracking</h2>
+              <p>Real-time queue progression and automated turn prediction.</p>
+            </div>
+            <button class="back-to-dash-btn">
+              <i class="fa-solid fa-arrow-left"></i> Dashboard
+            </button>
+          </div>
+
+          <div class="queue-tracking-grid">
+            <div class="card my-turn-spotlight-card">
+              <div class="spotlight-header">
+                <span>YOUR ASSIGNED TOKEN</span>
+                <button class="refresh-queue-btn" id="refreshQueueBtn" title="Refresh Live Status">
+                  <i class="fa-solid fa-arrows-rotate"></i> Refresh
+                </button>
+              </div>
+
+              <div class="spotlight-token" id="queueBigToken">A-018</div>
+              <h3 id="queueStatusHeading">Token Active</h3>
+              <p class="spotlight-ahead" id="queueAheadText">6 farmers are ahead of you.</p>
+
+              <div class="spotlight-progress">
+                <div class="bar-fill" id="queueProgressBar" style="width: 50%;"></div>
+              </div>
+
+              <div class="spotlight-stats-row">
+                <div class="stat-tile">
+                  <span>Now Serving</span>
+                  <strong id="queueNowServing">A-012</strong>
+                </div>
+                <div class="stat-tile">
+                  <span>Farmers Ahead</span>
+                  <strong id="queueAheadCount">6</strong>
+                </div>
+                <div class="stat-tile">
+                  <span>Estimated Wait</span>
+                  <strong id="queueEstimatedWait">42 mins</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Centre Queue Registry Table -->
+            <div class="card queue-roster-card">
+              <h3>Queue Registry at Centre</h3>
+              <div class="table-responsive">
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th>Token</th>
+                      <th>Farmer Name</th>
+                      <th>Crop</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="queueRosterTbody">
+                    <tr>
+                      <td><strong>A-012</strong></td>
+                      <td>Mahendra Singh</td>
+                      <td>Wheat</td>
+                      <td><span class="status-chip chip-serving">Serving Now</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>A-015</strong></td>
+                      <td>Sanjay Yadav</td>
+                      <td>Wheat</td>
+                      <td><span class="status-chip chip-waiting">Waiting</span></td>
+                    </tr>
+                    <tr class="highlight-user-row">
+                      <td><strong>A-018</strong></td>
+                      <td><span id="rosterUserName">Ramesh Kumar (You)</span></td>
+                      <td>Wheat</td>
+                      <td><span class="status-chip chip-waiting">Your Turn Next</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+           PAGE 4: MY PRODUCE
+        ================================================= -->
+        <div id="produceContent" class="page-content hidden">
+          <div class="panel-header">
+            <div>
+              <h2>My Produce & MSP Valuation</h2>
+              <p>Registered agricultural produce batches and procurement valuation.</p>
+            </div>
+            <button class="back-to-dash-btn">
+              <i class="fa-solid fa-arrow-left"></i> Dashboard
+            </button>
+          </div>
+
+          <div class="produce-grid">
+            <div class="card produce-batch-card">
+              <h3>Active Produce Batch</h3>
+              <div class="produce-details-list">
+                <div class="produce-row">
+                  <span>Crop</span>
+                  <strong id="produceCropName">Wheat (Kalyan Sona)</strong>
+                </div>
+                <div class="produce-row">
+                  <span>Registered Quantity</span>
+                  <strong id="produceQuantity">50 kg</strong>
+                </div>
+                <div class="produce-row">
+                  <span>Centre</span>
+                  <strong id="produceCentre">Centre A, Bhagalpur</strong>
+                </div>
+                <div class="produce-row">
+                  <span>Estimated MSP Rate</span>
+                  <strong>₹2,275 per Quintal (₹22.75 / kg)</strong>
+                </div>
+                <div class="produce-row highlight">
+                  <span>Total Estimated Valuation</span>
+                  <strong id="produceValuation">₹1,138</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="card produce-quality-card">
+              <h3>Fair Average Quality (FAQ) Standards</h3>
+              <ul class="quality-checklist">
+                <li><i class="fa-solid fa-check"></i> Moisture content must be below 12% by weight.</li>
+                <li><i class="fa-solid fa-check"></i> Inorganic foreign matter should not exceed 0.75%.</li>
+                <li><i class="fa-solid fa-check"></i> Free of weevilled grains and storage pests.</li>
+                <li><i class="fa-solid fa-check"></i> Clean jute/HDPE bag packaging recommended.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+           PAGE 5: PROCUREMENT STATUS (7-STAGE STEPPER)
+        ================================================= -->
+        <div id="procurementContent" class="page-content hidden">
+          <div class="panel-header">
+            <div>
+              <h2>Procurement Workflow Status</h2>
+              <p>Track your produce through mandatory verification and weighing stages.</p>
+            </div>
+            <button class="back-to-dash-btn">
+              <i class="fa-solid fa-arrow-left"></i> Dashboard
+            </button>
+          </div>
+
+          <div class="card procurement-tracker-card">
+            <!-- 7-Stage Horizontal Stepper -->
+            <div class="lifecycle-stepper" id="lifecycleStepper">
+              <div class="step-node active" data-stage="BOOKED">
+                <div class="node-circle"><i class="fa-solid fa-ticket"></i></div>
+                <span>Booked</span>
+              </div>
+              <div class="step-connector"></div>
+              <div class="step-node" data-stage="CHECKED_IN">
+                <div class="node-circle"><i class="fa-solid fa-id-card"></i></div>
+                <span>Checked-In</span>
+              </div>
+              <div class="step-connector"></div>
+              <div class="step-node" data-stage="WAITING">
+                <div class="node-circle"><i class="fa-solid fa-clock"></i></div>
+                <span>Waiting</span>
+              </div>
+              <div class="step-connector"></div>
+              <div class="step-node" data-stage="PROCESSING">
+                <div class="node-circle"><i class="fa-solid fa-gears"></i></div>
+                <span>Processing</span>
+              </div>
+              <div class="step-connector"></div>
+              <div class="step-node" data-stage="QUALITY_CHECK">
+                <div class="node-circle"><i class="fa-solid fa-vial-circle-check"></i></div>
+                <span>Quality Check</span>
+              </div>
+              <div class="step-connector"></div>
+              <div class="step-node" data-stage="WEIGHING">
+                <div class="node-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+                <span>Weighing</span>
+              </div>
+              <div class="step-connector"></div>
+              <div class="step-node" data-stage="COMPLETED">
+                <div class="node-circle"><i class="fa-solid fa-circle-check"></i></div>
+                <span>Completed</span>
+              </div>
+            </div>
+
+            <!-- Current Stage Description Box -->
+            <div class="current-stage-callout">
+              <div class="callout-top">
+                <span class="stage-tag" id="procurementStatusBadge">BOOKED</span>
+                <h3 id="procurementStageText">Slot Booked Successfully</h3>
+              </div>
+              <p id="procurementStageDesc">Your procurement slot is confirmed in the centralized system. Please arrive on time.</p>
+            </div>
+
+            <div class="procurement-actions-row">
+              <button class="primary-green-btn" id="advanceStatusBtn">
+                <i class="fa-solid fa-forward-step"></i>
+                <span>Advance Stage (Demo Simulation)</span>
+              </button>
+
+              <button class="secondary-outline-btn" id="refreshStatusBtn">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>Refresh Status</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+           PAGE 6: PAYMENTS & DBT SETTLEMENT
+        ================================================= -->
+        <div id="paymentsContent" class="page-content hidden">
+          <div class="panel-header">
+            <div>
+              <h2>Direct Benefit Transfer (DBT) Payments</h2>
+              <p>Transparent government MSP payouts credited straight to your bank account.</p>
+            </div>
+            <button class="back-to-dash-btn">
+              <i class="fa-solid fa-arrow-left"></i> Dashboard
+            </button>
+          </div>
+
+          <div class="payments-split-grid">
+            <div class="card payment-summary-card">
+              <span class="payment-card-sub">Total Disbursed / Due</span>
+              <div class="big-rupee-display" id="paymentAmountDisplay">₹1,138</div>
+
+              <div class="payment-badge-status" id="paymentStatusBadge">PENDING</div>
+              <p class="payment-notes" id="paymentStatusDesc">Funds will be credited via PFMS directly to your linked bank account after weighing.</p>
+
+              <div class="payment-metrics-block">
+                <div class="metric-item">
+                  <span>MSP Rate</span>
+                  <strong id="paymentRateDisplay">₹22.75 / kg</strong>
+                </div>
+                <div class="metric-item">
+                  <span>Produce Weight</span>
+                  <strong id="paymentQuantityDisplay">50 kg</strong>
+                </div>
+                <div class="metric-item">
+                  <span>UTR / Reference ID</span>
+                  <strong id="paymentTxnDisplay">Pending</strong>
+                </div>
+              </div>
+
+              <button class="claim-payment-btn" id="processPaymentBtn">
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+                <span>Process / Claim DBT Payment</span>
+              </button>
+            </div>
+
+            <div class="card bank-profile-card">
+              <h3>Registered DBT Bank Account</h3>
+              <div class="bank-details-list">
+                <div class="bank-row">
+                  <span>Account Holder</span>
+                  <strong id="bankFarmerName">Ramesh Kumar</strong>
+                </div>
+                <div class="bank-row">
+                  <span>Bank Name</span>
+                  <strong>State Bank of India</strong>
+                </div>
+                <div class="bank-row">
+                  <span>Account Number</span>
+                  <strong>XXXX-XXXX-4819</strong>
+                </div>
+                <div class="bank-row">
+                  <span>IFSC Code</span>
+                  <strong>SBIN0001234</strong>
+                </div>
+                <div class="bank-row">
+                  <span>Aadhaar Seeding</span>
+                  <span class="seed-badge"><i class="fa-solid fa-check"></i> NPCI Linked</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+           PAGE 7: NOTIFICATIONS CENTER
+        ================================================= -->
+        <div id="notificationsContent" class="page-content hidden">
+          <div class="panel-header">
+            <div>
+              <h2>Notifications & Advisories</h2>
+              <p>Official announcements, queue movements, and weather updates.</p>
+            </div>
+            <button class="back-to-dash-btn">
+              <i class="fa-solid fa-arrow-left"></i> Dashboard
+            </button>
+          </div>
+
+          <div class="card notifications-hub-card">
+            <div class="notifications-filters">
+              <button class="filter-pill active" data-filter="all">All</button>
+              <button class="filter-pill" data-filter="queue">Queue</button>
+              <button class="filter-pill" data-filter="payments">Payments</button>
+            </div>
+
+            <div class="full-notifications-list" id="fullNotifList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+           PAGE 8: HELP & SUPPORT
+        ================================================= -->
+        <div id="supportContent" class="page-content hidden">
+          <div class="panel-header">
+            <div>
+              <h2>Help & Kisan Support Helpline</h2>
+              <p>24x7 farmer assistance for procurement, mandi procedures, and technical queries.</p>
+            </div>
+            <button class="back-to-dash-btn">
+              <i class="fa-solid fa-arrow-left"></i> Dashboard
+            </button>
+          </div>
+
+          <div class="support-grid">
+            <div class="card support-cards">
+              <h3>Official Helplines</h3>
+              <div class="helpline-boxes">
+                <a href="tel:18001801551" class="helpline-link">
+                  <i class="fa-solid fa-phone-volume"></i>
+                  <div>
+                    <strong>Kisan Call Centre (Toll Free)</strong>
+                    <span>1800-180-1551 (6:00 AM - 10:00 PM)</span>
+                  </div>
+                </a>
+                <a href="tel:1900" class="helpline-link">
+                  <i class="fa-solid fa-headset"></i>
+                  <div>
+                    <strong>Centre A Mandi Helpdesk</strong>
+                    <span>+91 98765 43210</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="card faq-card">
+              <h3>Frequently Asked Questions</h3>
+              <div class="faq-list">
+                <details class="faq-item" open>
+                  <summary>How do I know my token position in the queue?</summary>
+                  <p>Your token and the number of farmers ahead of you update in real time on the Dashboard and "My Turn" section.</p>
+                </details>
+                <details class="faq-item">
+                  <summary>When will I receive my produce payment?</summary>
+                  <p>Once your produce completes Quality Check and Weighing, payment is triggered via PFMS directly to your bank account within 24 to 48 hours.</p>
+                </details>
+                <details class="faq-item">
+                  <summary>What if I am running late for my time slot?</summary>
+                  <p>KisanQueue reserves your token order; if you arrive later than the slot, you will be placed at the nearest available opening without losing your registration.</p>
+                </details>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+           PAGE 9: BOOKING CONFIRMATION SLIP
+        ================================================= -->
+        <div id="confirmationContent" class="page-content hidden">
+          <div class="confirmation-wrapper">
+            <div class="card confirmation-receipt-card">
+              <div class="receipt-success-icon">
                 <i class="fa-solid fa-check"></i>
               </div>
-
               <h2>Booking Confirmed Successfully!</h2>
+              <p class="receipt-sub">Your appointment has been registered at the centralized procurement server.</p>
 
-              <p class="confirmation-subtitle">
-                Please keep these booking details safe and reach the centre on
-                time.
-              </p>
-
-              <div class="confirmation-token-box">
-                <span> Your Token Number </span>
-
-                <strong id="confirmationToken"> A-019 </strong>
+              <div class="receipt-token-badge">
+                <span>YOUR TOKEN NUMBER</span>
+                <div class="token-val" id="confirmationToken">A-018</div>
               </div>
 
-              <div class="confirmation-details">
-                <div class="confirmation-detail">
-                  <i class="fa-solid fa-receipt"></i>
-
-                  <div>
-                    <span> Booking ID </span>
-
-                    <strong id="confirmationBookingId"> KQ-000000 </strong>
-                  </div>
+              <div class="receipt-details-table">
+                <div class="receipt-row">
+                  <span>Booking ID</span>
+                  <strong id="confirmationBookingId">KQ-12345678</strong>
                 </div>
-
-                <div class="confirmation-detail">
-                  <i class="fa-solid fa-location-dot"></i>
-
-                  <div>
-                    <span> Procurement Centre </span>
-
-                    <strong id="confirmationCentre">
-                      Centre A, Bhagalpur
-                    </strong>
-                  </div>
+                <div class="receipt-row">
+                  <span>Procurement Centre</span>
+                  <strong id="confirmationCentre">Centre A, Bhagalpur</strong>
                 </div>
-
-                <div class="confirmation-detail">
-                  <i class="fa-solid fa-wheat-awn"></i>
-
-                  <div>
-                    <span> Crop </span>
-
-                    <strong id="confirmationCrop"> Wheat </strong>
-                  </div>
+                <div class="receipt-row">
+                  <span>Crop</span>
+                  <strong id="confirmationCrop">Wheat</strong>
                 </div>
-
-                <div class="confirmation-detail">
-                  <i class="fa-solid fa-weight-hanging"></i>
-
-                  <div>
-                    <span> Quantity </span>
-
-                    <strong id="confirmationQuantity"> 12 kg </strong>
-                  </div>
+                <div class="receipt-row">
+                  <span>Quantity</span>
+                  <strong id="confirmationQuantity">50 kg</strong>
                 </div>
-
-                <div class="confirmation-detail">
-                  <i class="fa-regular fa-calendar"></i>
-
-                  <div>
-                    <span> Procurement Date </span>
-
-                    <strong id="confirmationDate"> -- </strong>
-                  </div>
+                <div class="receipt-row">
+                  <span>Procurement Date</span>
+                  <strong id="confirmationDate">28/08/2026</strong>
                 </div>
-
-                <div class="confirmation-detail">
-                  <i class="fa-regular fa-clock"></i>
-
-                  <div>
-                    <span> Time Slot </span>
-
-                    <strong id="confirmationTime"> 10:00 - 11:00 AM </strong>
-                  </div>
+                <div class="receipt-row">
+                  <span>Time Slot</span>
+                  <strong id="confirmationTime">10:00 - 11:00 AM</strong>
                 </div>
               </div>
 
-              <div class="confirmation-notice">
-                <i class="fa-solid fa-circle-info"></i>
-
-                <div>
-                  <strong> Important </strong>
-
-                  <p>
-                    Please reach the procurement centre 10 minutes before your
-                    selected slot.
-                  </p>
-                </div>
-              </div>
-
-              <div class="confirmation-actions">
-                <button
-                  class="confirmation-secondary-btn"
-                  id="confirmationDashboardBtn"
-                >
-                  <i class="fa-solid fa-house"></i>
-
-                  Go to Dashboard
+              <div class="receipt-buttons">
+                <button class="secondary-btn" id="confirmationDashboardBtn">
+                  <i class="fa-solid fa-house"></i> Dashboard
                 </button>
-
-                <button
-                  class="confirmation-primary-btn"
-                  id="confirmationTurnBtn"
-                >
-                  <i class="fa-solid fa-users"></i>
-
-                  View My Turn
+                <button class="primary-btn" id="confirmationTurnBtn">
+                  <i class="fa-solid fa-users"></i> View My Turn
                 </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- =================================================
-             MY TURN
-        ================================================= -->
-
-        <div id="queueContent" class="page-content hidden">
-          <div class="page-heading">
-            <div>
-              <h1>My Turn</h1>
-
-              <p>Track your live procurement queue.</p>
-            </div>
-          </div>
-
-          <div class="card my-turn-card">
-            <div class="big-token" id="queueBigToken">A-018</div>
-
-            <h3>Your Token</h3>
-
-            <p id="queueAheadText">6 farmers are ahead of you.</p>
-
-            <div class="large-progress">
-              <div id="queueProgressBar"></div>
-            </div>
-
-            <div class="turn-stats">
-              <div>
-                <span> Now Serving </span>
-
-                <strong id="queueNowServing"> A-012 </strong>
-              </div>
-
-              <div>
-                <span> Farmers Ahead </span>
-
-                <strong id="queueAheadCount"> 6 </strong>
-              </div>
-
-              <div>
-                <span> Estimated Wait </span>
-
-                <strong id="queueEstimatedWait"> 42 mins </strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- =================================================
-             MY PRODUCE
-        ================================================= -->
-
-        <div id="produceContent" class="page-content hidden">
-          <div class="page-heading">
-            <div>
-              <h1>My Produce</h1>
-
-              <p>Registered agricultural produce and procurement details.</p>
-            </div>
-
-            <button class="back-btn back-dashboard-trigger">
-              <i class="fa-solid fa-arrow-left"></i>
-
-              Dashboard
-            </button>
-          </div>
-
-          <div class="bottom-grid">
-            <div class="card info-card">
-              <h3>Active Produce Batch</h3>
-
-              <div class="confirmation-details">
-                <div class="confirmation-detail">
-                  <i class="fa-solid fa-wheat-awn"></i>
-
-                  <div>
-                    <span> Crop Name </span>
-
-                    <strong id="produceCropName"> Wheat </strong>
-                  </div>
-                </div>
-
-                <div class="confirmation-detail">
-                  <i class="fa-solid fa-weight-hanging"></i>
-
-                  <div>
-                    <span> Quantity </span>
-
-                    <strong id="produceQuantity"> -- kg </strong>
-                  </div>
-                </div>
-
-                <div class="confirmation-detail">
-                  <i class="fa-solid fa-location-dot"></i>
-
-                  <div>
-                    <span> Procurement Centre </span>
-
-                    <strong id="produceCentre"> -- </strong>
-                  </div>
-                </div>
-
-                <div class="confirmation-detail">
-                  <i class="fa-regular fa-calendar"></i>
-
-                  <div>
-                    <span> Slot Date & Time </span>
-
-                    <strong id="produceSlot"> -- </strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card info-card">
-              <h3>Quality & MSP Standards</h3>
-
-              <div class="info-list">
-                <p>
-                  <i class="fa-solid fa-check"></i>
-                  Fair Average Quality (FAQ) standards apply.
-                </p>
-
-                <p>
-                  <i class="fa-solid fa-check"></i>
-                  Moisture content should be within prescribed limits.
-                </p>
-
-                <p>
-                  <i class="fa-solid fa-check"></i>
-                  Automated electronic weighing at centre.
-                </p>
-
-                <p>
-                  <i class="fa-solid fa-check"></i>
-                  Direct Bank Transfer (DBT) to farmer account.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- =================================================
-             PROCUREMENT STATUS
-        ================================================= -->
-
-        <div id="procurementContent" class="page-content hidden">
-          <div class="page-heading">
-            <div>
-              <h1>Procurement Status</h1>
-
-              <p>Track the stages of verification, weighing, and clearance.</p>
-            </div>
-
-            <button class="back-btn back-dashboard-trigger">
-              <i class="fa-solid fa-arrow-left"></i>
-
-              Dashboard
-            </button>
-          </div>
-
-          <div class="card my-turn-card">
-            <div class="big-token" id="procurementStatusBadge" style="font-size: 20px; padding: 8px 24px; border-radius: 30px; display: inline-block;">BOOKED</div>
-
-            <h3 style="margin-top: 15px;">Current Stage: <span id="procurementStageText">Slot Booked</span></h3>
-
-            <p id="procurementStageDesc">Your procurement slot is confirmed. Reach the centre on time.</p>
-
-            <div class="turn-stats" style="margin-top: 25px;">
-              <div>
-                <span> Token </span>
-
-                <strong id="procurementToken"> -- </strong>
-              </div>
-
-              <div>
-                <span> Centre </span>
-
-                <strong id="procurementCentreName"> -- </strong>
-              </div>
-
-              <div>
-                <span> Payment </span>
-
-                <strong id="procurementPaymentMini"> PENDING </strong>
-              </div>
-            </div>
-
-            <div style="margin-top: 25px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-              <button class="primary-btn" id="advanceStatusBtn" style="padding: 10px 18px; font-size: 14px;">
-                <i class="fa-solid fa-forward-step"></i>
-
-                Advance Stage (Demo)
-              </button>
-
-              <button class="back-btn" id="refreshStatusBtn" style="padding: 10px 18px; font-size: 14px;">
-                <i class="fa-solid fa-arrows-rotate"></i>
-
-                Refresh
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- =================================================
-             PAYMENTS
-        ================================================= -->
-
-        <div id="paymentsContent" class="page-content hidden">
-          <div class="page-heading">
-            <div>
-              <h1>Procurement Payments</h1>
-
-              <p>Track your Direct Benefit Transfer (DBT) payment status.</p>
-            </div>
-
-            <button class="back-btn back-dashboard-trigger">
-              <i class="fa-solid fa-arrow-left"></i>
-
-              Dashboard
-            </button>
-          </div>
-
-          <div class="card my-turn-card">
-            <div class="big-token" id="paymentAmountDisplay" style="font-size: 28px; padding: 12px 28px; border-radius: 16px; display: inline-block;">₹0</div>
-
-            <h3 style="margin-top: 15px;">Payment Status: <span id="paymentStatusBadge">PENDING</span></h3>
-
-            <p id="paymentStatusDesc">Payment will be credited directly to your bank account after procurement completion.</p>
-
-            <div class="turn-stats" style="margin-top: 25px;">
-              <div>
-                <span> MSP Rate </span>
-
-                <strong id="paymentRateDisplay"> ₹22.75 / kg </strong>
-              </div>
-
-              <div>
-                <span> Total Produce </span>
-
-                <strong id="paymentQuantityDisplay"> -- kg </strong>
-              </div>
-
-              <div>
-                <span> Transaction ID </span>
-
-                <strong id="paymentTxnDisplay"> Pending </strong>
-              </div>
-            </div>
-
-            <div style="margin-top: 25px;">
-              <button class="confirm-btn" id="processPaymentBtn" style="margin: 0 auto; max-width: 280px;">
-                <i class="fa-solid fa-indian-rupee-sign"></i>
-
-                Process / Claim Payment
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- =================================================
-             NOTIFICATIONS
-        ================================================= -->
-
-        <div id="notificationsContent" class="page-content hidden">
-          <div class="page-heading">
-            <div>
-              <h1>Notifications</h1>
-
-              <p>Live alerts and operational updates.</p>
-            </div>
-
-            <button class="back-btn back-dashboard-trigger">
-              <i class="fa-solid fa-arrow-left"></i>
-
-              Dashboard
-            </button>
-          </div>
-
-          <div class="card info-card">
-            <h3>Recent Alerts</h3>
-
-            <div id="notificationsList" class="info-list" style="margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
-              <div class="update-item">
-                <i class="fa-solid fa-bell"></i>
-
-                <div>
-                  <strong> Welcome to KisanQueue </strong>
-
-                  <span> Your profile is connected to the centralized procurement network. </span>
-                </div>
               </div>
             </div>
           </div>
@@ -1108,8 +1240,119 @@
       </main>
     </section>
 
-    <!-- JAVASCRIPT -->
+    <!-- =====================================================
+     INTERACTIVE MODALS
+===================================================== -->
 
+    <!-- 1. VOICE ASSISTANT MODAL -->
+    <div class="modal-backdrop hidden" id="voiceModal">
+      <div class="modal-box voice-modal-box">
+        <button class="modal-close" id="closeVoiceModal"><i class="fa-solid fa-xmark"></i></button>
+        <div class="voice-wave-circle active">
+          <i class="fa-solid fa-microphone"></i>
+        </div>
+        <h3>Voice Assistant</h3>
+        <p id="voiceStatusText">Listening... Please speak your command.</p>
+        <div class="voice-transcript-box" id="voiceTranscript">"Tap below or speak: 'Show my turn', 'Book slot', 'Show payments'..."</div>
+        <div class="voice-hints">
+          <button class="voice-hint-chip" data-cmd="dashboard">"Go to dashboard"</button>
+          <button class="voice-hint-chip" data-cmd="turn">"Show my turn"</button>
+          <button class="voice-hint-chip" data-cmd="book">"Book a slot"</button>
+          <button class="voice-hint-chip" data-cmd="payments">"Show payments"</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. VIEW ROUTE MAP MODAL -->
+    <div class="modal-backdrop hidden" id="routeModal">
+      <div class="modal-box route-modal-box">
+        <button class="modal-close" id="closeRouteModal"><i class="fa-solid fa-xmark"></i></button>
+        <h3>Route to Procurement Centre</h3>
+        <p class="modal-sub">Fastest route from your village to <strong id="routeCentreName">Centre A, Bhagalpur</strong></p>
+
+        <!-- Mock Navigation Map Visual -->
+        <div class="mock-map-canvas">
+          <div class="map-path-line"></div>
+          <div class="map-pin start-pin"><i class="fa-solid fa-house"></i> <span>Village</span></div>
+          <div class="map-pin car-pin"><i class="fa-solid fa-car-side"></i></div>
+          <div class="map-pin end-pin"><i class="fa-solid fa-location-dot"></i> <span>Centre A</span></div>
+        </div>
+
+        <div class="route-metrics-grid">
+          <div><span>Distance</span><strong>4.8 km</strong></div>
+          <div><span>Travel Time</span><strong>18 mins</strong></div>
+          <div><span>Traffic</span><strong style="color:#079447;">Clear</strong></div>
+          <div><span>Recommended Departure</span><strong>10:50 AM</strong></div>
+        </div>
+
+        <button class="primary-green-btn" id="openGoogleMapsBtn" style="margin-top:16px;">
+          <i class="fa-solid fa-map-location-dot"></i> Open in Maps App
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. CHANGE CENTRE MODAL -->
+    <div class="modal-backdrop hidden" id="centreModal">
+      <div class="modal-box">
+        <button class="modal-close" id="closeCentreModal"><i class="fa-solid fa-xmark"></i></button>
+        <h3>Select Procurement Centre</h3>
+        <p class="modal-sub">Choose a government procurement hub near you:</p>
+        <div class="centre-picker-list">
+          <button class="centre-option active" data-centre="Centre A, Bhagalpur">
+            <div>
+              <strong>Centre A, Bhagalpur</strong>
+              <span>Main Agricultural Mandi (Distance: 4.8 km)</span>
+            </div>
+            <i class="fa-solid fa-circle-check check-icon"></i>
+          </button>
+          <button class="centre-option" data-centre="Centre B, Sabour">
+            <div>
+              <strong>Centre B, Sabour</strong>
+              <span>State Warehouse Complex (Distance: 8.2 km)</span>
+            </div>
+            <i class="fa-solid fa-circle-check check-icon"></i>
+          </button>
+          <button class="centre-option" data-centre="Centre C, Nathnagar">
+            <div>
+              <strong>Centre C, Nathnagar</strong>
+              <span>Cooperative Depot (Distance: 11.5 km)</span>
+            </div>
+            <i class="fa-solid fa-circle-check check-icon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. FARMER PROFILE / LOGOUT MODAL -->
+    <div class="modal-backdrop hidden" id="profileModal">
+      <div class="modal-box profile-modal-box">
+        <button class="modal-close" id="closeProfileModal"><i class="fa-solid fa-xmark"></i></button>
+        <div class="profile-large-avatar">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <h3 id="modalFarmerName">Ramesh Kumar</h3>
+        <p id="modalFarmerId">Farmer ID: F1001</p>
+        <div class="modal-profile-list">
+          <div><span>Mobile:</span> <strong id="modalFarmerMobile">98765 43210</strong></div>
+          <div><span>Location:</span> <strong>Bhagalpur, Bihar</strong></div>
+          <div><span>Status:</span> <strong style="color:#079447;">Active & Verified</strong></div>
+        </div>
+        <button class="logout-red-btn" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </div>
+
+    <!-- 5. GENERAL ACTION MODAL (Call / Message / Other Farmers / Learn More) -->
+    <div class="modal-backdrop hidden" id="actionModal">
+      <div class="modal-box">
+        <button class="modal-close" id="closeActionModal"><i class="fa-solid fa-xmark"></i></button>
+        <h3 id="actionModalTitle">Information</h3>
+        <div id="actionModalBody" style="margin-top:14px; line-height:1.6; color:#4a5568;"></div>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
     <script src="sih11.js"></script>
   </body>
 </html>

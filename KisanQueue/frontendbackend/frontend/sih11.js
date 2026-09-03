@@ -1,6 +1,7 @@
 /* =====================================================
-   KISANQUEUE - SIH11 JAVASCRIPT
+   KISANQUEUE - JAVASCRIPT
    Connected with Express / MongoDB Backend
+   Upgraded Dashboard with Web Speech API & Multi-Language
 ===================================================== */
 
 /* =====================================================
@@ -27,7 +28,7 @@ async function apiCall(endpoint, method = "GET", data = null) {
     const result = await response.json();
 
     if (!response.ok) {
-      console.warn(`[API ${method} ${endpoint}] returned error status ${response.status}:`, result);
+      console.warn(`[API ${method} ${endpoint}] returned status ${response.status}:`, result);
     }
 
     return result;
@@ -38,7 +39,7 @@ async function apiCall(endpoint, method = "GET", data = null) {
 }
 
 /* =====================================================
-   ELEMENTS
+   DOM ELEMENTS
 ===================================================== */
 
 const loginPage = document.getElementById("loginPage");
@@ -49,43 +50,120 @@ const logoutBtn = document.getElementById("logoutBtn");
 const farmerNameInput = document.getElementById("farmerName");
 const aadhaarInput = document.getElementById("aadhaar");
 const mobileInput = document.getElementById("mobile");
+const sendOtpBtn = document.getElementById("sendOtpBtn");
+const otpInputs = document.querySelectorAll(".otp-input");
 
 const loginLanguage = document.getElementById("loginLanguage");
-const dashboardLanguage = document.getElementById("dashboardLanguage");
 const topLanguage = document.getElementById("topLanguage");
+const sidebarLanguage = document.getElementById("sidebarLanguage");
 
-const sidebarFarmerName = document.getElementById("sidebarFarmerName");
-const headerFarmerName = document.getElementById("headerFarmerName");
-const welcomeName = document.getElementById("welcomeName");
-
-const mobileMenu = document.getElementById("mobileMenu");
 const sidebar = document.getElementById("sidebar");
+const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 
+// Panels
 const dashboardContent = document.getElementById("dashboardContent");
 const bookContent = document.getElementById("bookContent");
 const queueContent = document.getElementById("queueContent");
-const confirmationContent = document.getElementById("confirmationContent");
 const produceContent = document.getElementById("produceContent");
 const procurementContent = document.getElementById("procurementContent");
 const paymentsContent = document.getElementById("paymentsContent");
 const notificationsContent = document.getElementById("notificationsContent");
+const supportContent = document.getElementById("supportContent");
+const confirmationContent = document.getElementById("confirmationContent");
 
-const confirmationToken = document.getElementById("confirmationToken");
-const confirmationBookingId = document.getElementById("confirmationBookingId");
-const confirmationCentre = document.getElementById("confirmationCentre");
-const confirmationCrop = document.getElementById("confirmationCrop");
-const confirmationQuantity = document.getElementById("confirmationQuantity");
-const confirmationDate = document.getElementById("confirmationDate");
-const confirmationTime = document.getElementById("confirmationTime");
+// Header Elements
+const headerGreeting = document.getElementById("headerGreeting");
+const headerFarmerName = document.getElementById("headerFarmerName");
+const headerCropName = document.getElementById("headerCropName");
+const liveDate = document.getElementById("liveDate");
+const liveTime = document.getElementById("liveTime");
+const headerVoiceBtn = document.getElementById("headerVoiceBtn");
+const headerNotifBtn = document.getElementById("headerNotifBtn");
+const headerNotifBadge = document.getElementById("headerNotifBadge");
+const sidebarNotifBadge = document.getElementById("sidebarNotifBadge");
 
-const confirmationDashboardBtn = document.getElementById("confirmationDashboardBtn");
-const confirmationTurnBtn = document.getElementById("confirmationTurnBtn");
-const newSlotBtn = document.getElementById("newSlotBtn");
-const backDashboard = document.getElementById("backDashboard");
-const pageTitle = document.getElementById("pageTitle");
+// Sidebar Elements
+const sidebarFarmerName = document.getElementById("sidebarFarmerName");
+const sidebarFarmerMobile = document.getElementById("sidebarFarmerMobile");
+const sidebarFarmerCard = document.getElementById("sidebarFarmerCard");
+const sidebarVoiceBtn = document.getElementById("sidebarVoiceBtn");
+
+// Strip & Main Dashboard Cards
+const stripCentreName = document.getElementById("stripCentreName");
+const changeCentreBtn = document.getElementById("changeCentreBtn");
+
+const dashToken = document.getElementById("dashToken");
+const dashAhead = document.getElementById("dashAhead");
+const dashWait = document.getElementById("dashWait");
+const dashSegmentedBar = document.getElementById("dashSegmentedBar");
+const dashNotifyThreshold = document.getElementById("dashNotifyThreshold");
+const listenUpdateBtn = document.getElementById("listenUpdateBtn");
+
+const dashLeaveTime = document.getElementById("dashLeaveTime");
+const dashDistance = document.getElementById("dashDistance");
+const dashTravelTime = document.getElementById("dashTravelTime");
+const dashBuffer = document.getElementById("dashBuffer");
+const dashArrivalTime = document.getElementById("dashArrivalTime");
+const viewRouteBtn = document.getElementById("viewRouteBtn");
+
+const dashNextStageName = document.getElementById("dashNextStageName");
+const dashNextCrop = document.getElementById("dashNextCrop");
+const viewFullProcessBtn = document.getElementById("viewFullProcessBtn");
+
+const dashExpectedTurnTime = document.getElementById("dashExpectedTurnTime");
+const dashRemindAtTime = document.getElementById("dashRemindAtTime");
+
+// Quick Actions
+const qaCallCentre = document.getElementById("qaCallCentre");
+const qaMessageCentre = document.getElementById("qaMessageCentre");
+const qaOtherFarmers = document.getElementById("qaOtherFarmers");
+const qaLearnMore = document.getElementById("qaLearnMore");
+const noticeOtherCentresBtn = document.getElementById("noticeOtherCentresBtn");
+
+// Recent Notifications & Live Queue Track
+const recentNotifStream = document.getElementById("recentNotifStream");
+const notifTokenVal = document.getElementById("notifTokenVal");
+const notifSlotDate = document.getElementById("notifSlotDate");
+const notifCentreName = document.getElementById("notifCentreName");
+const notifPaymentVal = document.getElementById("notifPaymentVal");
+
+const lqCentreHeader = document.getElementById("lqCentreHeader");
+const viewFullQueueBtn = document.getElementById("viewFullQueueBtn");
+const lqNowServing = document.getElementById("lqNowServing");
+const lqCurrentFarmerName = document.getElementById("lqCurrentFarmerName");
+const lqFarmersAhead = document.getElementById("lqFarmersAhead");
+const lqEstimatedWait = document.getElementById("lqEstimatedWait");
+const queueAvatarsTrack = document.getElementById("queueAvatarsTrack");
+const trackStartToken = document.getElementById("trackStartToken");
+const trackEndToken = document.getElementById("trackEndToken");
+
+// Modals
+const voiceModal = document.getElementById("voiceModal");
+const closeVoiceModal = document.getElementById("closeVoiceModal");
+const voiceStatusText = document.getElementById("voiceStatusText");
+const voiceTranscript = document.getElementById("voiceTranscript");
+
+const routeModal = document.getElementById("routeModal");
+const closeRouteModal = document.getElementById("closeRouteModal");
+const routeCentreName = document.getElementById("routeCentreName");
+const openGoogleMapsBtn = document.getElementById("openGoogleMapsBtn");
+
+const centreModal = document.getElementById("centreModal");
+const closeCentreModal = document.getElementById("closeCentreModal");
+
+const profileModal = document.getElementById("profileModal");
+const closeProfileModal = document.getElementById("closeProfileModal");
+const modalFarmerName = document.getElementById("modalFarmerName");
+const modalFarmerId = document.getElementById("modalFarmerId");
+const modalFarmerMobile = document.getElementById("modalFarmerMobile");
+
+const actionModal = document.getElementById("actionModal");
+const closeActionModal = document.getElementById("closeActionModal");
+const actionModalTitle = document.getElementById("actionModalTitle");
+const actionModalBody = document.getElementById("actionModalBody");
 
 /* =====================================================
-   TRANSLATIONS
+   TRANSLATIONS (12 INDIAN LANGUAGES PRESERVED)
 ===================================================== */
 
 const translations = {
@@ -97,7 +175,7 @@ const translations = {
     procurement: "Procurement Status",
     payments: "Payments",
     notifications: "Notifications",
-    bookNew: "Book New Slot",
+    support: "Help & Support",
     login: "Login",
     logout: "Logout",
     farmer: "Farmer Name",
@@ -105,6 +183,9 @@ const translations = {
     mobile: "Mobile Number",
     otp: "OTP",
     sendOtp: "Send OTP",
+    greetingMorning: "Good Morning",
+    greetingAfternoon: "Good Afternoon",
+    greetingEvening: "Good Evening",
   },
   Hindi: {
     dashboard: "डैशबोर्ड",
@@ -114,7 +195,7 @@ const translations = {
     procurement: "खरीद की स्थिति",
     payments: "भुगतान",
     notifications: "सूचनाएं",
-    bookNew: "नया स्लॉट बुक करें",
+    support: "सहायता और संपर्क",
     login: "लॉगिन",
     logout: "लॉगआउट",
     farmer: "किसान का नाम",
@@ -122,6 +203,9 @@ const translations = {
     mobile: "मोबाइल नंबर",
     otp: "ओटीपी",
     sendOtp: "ओटीपी भेजें",
+    greetingMorning: "शुभ प्रभात",
+    greetingAfternoon: "शुभ दोपहर",
+    greetingEvening: "शुभ संध्या",
   },
   Bengali: {
     dashboard: "ড্যাশবোর্ড",
@@ -131,7 +215,7 @@ const translations = {
     procurement: "সংগ্রহের অবস্থা",
     payments: "অর্থপ্রদান",
     notifications: "বিজ্ঞপ্তি",
-    bookNew: "নতুন স্লট বুক করুন",
+    support: "সাহায্য",
     login: "লগইন",
     logout: "লগআউট",
     farmer: "কৃষকের নাম",
@@ -139,6 +223,9 @@ const translations = {
     mobile: "মোবাইল নম্বর",
     otp: "ওটিপি",
     sendOtp: "ওটিপি পাঠান",
+    greetingMorning: "সুপ্রভাত",
+    greetingAfternoon: "শুভ অপরাহ্ন",
+    greetingEvening: "শুভ সন্ধ্যা",
   },
   Marathi: {
     dashboard: "डॅशबोर्ड",
@@ -148,7 +235,7 @@ const translations = {
     procurement: "खरेदी स्थिती",
     payments: "पेमेंट्स",
     notifications: "सूचना",
-    bookNew: "नवीन स्लॉट बुक करा",
+    support: "मदत आणि संपर्क",
     login: "लॉगिन",
     logout: "लॉगआउट",
     farmer: "शेतकऱ्याचे नाव",
@@ -156,6 +243,9 @@ const translations = {
     mobile: "मोबाईल क्रमांक",
     otp: "ओटीपी",
     sendOtp: "ओटीपी पाठवा",
+    greetingMorning: "शुभ प्रभात",
+    greetingAfternoon: "शुभ दुपार",
+    greetingEvening: "शुभ संध्याकाळ",
   },
   Telugu: {
     dashboard: "డాష్‌బోర్డ్",
@@ -165,7 +255,7 @@ const translations = {
     procurement: "సేకరణ స్థితి",
     payments: "చెల్లింపులు",
     notifications: "నోటిఫికేషన్లు",
-    bookNew: "కొత్త స్లాట్ బుక్ చేయండి",
+    support: "సహాయం",
     login: "లాగిన్",
     logout: "లాగ్ అవుట్",
     farmer: "రైతు పేరు",
@@ -173,6 +263,9 @@ const translations = {
     mobile: "మొబైల్ నంబర్",
     otp: "ఓటీపీ",
     sendOtp: "ఓటీపీ పంపండి",
+    greetingMorning: "శుభోదయం",
+    greetingAfternoon: "శుభ మధ్యాహ్నం",
+    greetingEvening: "శుభ సాయంత్రం",
   },
   Tamil: {
     dashboard: "டாஷ்போர்டு",
@@ -182,7 +275,7 @@ const translations = {
     procurement: "கொள்முதல் நிலை",
     payments: "கொடுப்பனவுகள்",
     notifications: "அறிவிப்புகள்",
-    bookNew: "புதிய ஸ்லாட் பதிவு",
+    support: "உதவி",
     login: "உள்நுழை",
     logout: "வெளியேறு",
     farmer: "விவசாயி பெயர்",
@@ -190,6 +283,9 @@ const translations = {
     mobile: "மொபைல் எண்",
     otp: "OTP",
     sendOtp: "OTP அனுப்பு",
+    greetingMorning: "காலை வணக்கம்",
+    greetingAfternoon: "மதிய வணக்கம்",
+    greetingEvening: "மாலை வணக்கம்",
   },
   Gujarati: {
     dashboard: "ડેશબોર્ડ",
@@ -199,7 +295,7 @@ const translations = {
     procurement: "ખરીદી સ્થિતિ",
     payments: "ચુકવણીઓ",
     notifications: "સૂચનાઓ",
-    bookNew: "નવો સ્લોટ બુક કરો",
+    support: "સહાય",
     login: "લોગિન",
     logout: "લોગઆઉટ",
     farmer: "ખેડૂતનું નામ",
@@ -207,6 +303,9 @@ const translations = {
     mobile: "મોબાઇલ નંબર",
     otp: "ઓટીપી",
     sendOtp: "ઓટીપી મોકલો",
+    greetingMorning: "સુપ્રભાત",
+    greetingAfternoon: "શુભ બપોર",
+    greetingEvening: "શુભ સાંજ",
   },
   Kannada: {
     dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
@@ -216,7 +315,7 @@ const translations = {
     procurement: "ಖರೀದಿ ಸ್ಥಿತಿ",
     payments: "ಪಾವತಿಗಳು",
     notifications: "ಅಧಿಸೂಚನೆಗಳು",
-    bookNew: "ಹೊಸ ಸ್ಲಾಟ್ ಬುಕ್ ಮಾಡಿ",
+    support: "ಸಹಾಯ",
     login: "ಲಾಗಿನ್",
     logout: "ಲಾಗ್‌ಔಟ್",
     farmer: "ರೈತರ ಹೆಸರು",
@@ -224,6 +323,9 @@ const translations = {
     mobile: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
     otp: "ಒಟಿಪಿ",
     sendOtp: "ಒಟಿಪಿ ಕಳುಹಿಸಿ",
+    greetingMorning: "ಶುಭೋದಯ",
+    greetingAfternoon: "ಶುಭ ಮಧ್ಯಾಹ್ನ",
+    greetingEvening: "ಶುಭ ಸಂಜೆ",
   },
   Malayalam: {
     dashboard: "ഡാഷ്ബോർഡ്",
@@ -233,7 +335,7 @@ const translations = {
     procurement: "സംഭരണ ​​സ്ഥിതി",
     payments: "പേയ്‌മെന്റുകൾ",
     notifications: "അറിയിപ്പുകൾ",
-    bookNew: "പുതിയ സ്ലോട്ട് ബുക്ക് ചെയ്യുക",
+    support: "സഹായം",
     login: "ലോഗിൻ",
     logout: "ലോഗൗട്ട്",
     farmer: "കർഷകന്റെ പേര്",
@@ -241,6 +343,9 @@ const translations = {
     mobile: "മൊബൈൽ നമ്പർ",
     otp: "ഒടിപി",
     sendOtp: "ഒടിപി അയയ്ക്കുക",
+    greetingMorning: "സുപ്രഭാതം",
+    greetingAfternoon: "ശുഭ ഉച്ചതിരിഞ്ഞ്",
+    greetingEvening: "ശുഭ സായാഹ്നം",
   },
   Punjabi: {
     dashboard: "ਡੈਸ਼ਬੋਰਡ",
@@ -250,7 +355,7 @@ const translations = {
     procurement: "ਖਰੀਦ ਸਥਿਤੀ",
     payments: "ਭੁਗਤਾਨ",
     notifications: "ਸੂਚਨਾਵਾਂ",
-    bookNew: "ਨਵਾਂ ਸਲਾਟ ਬੁੱਕ ਕਰੋ",
+    support: "ਸਹਾਇਤਾ",
     login: "ਲੌਗਇਨ",
     logout: "ਲੌਗਆਉਟ",
     farmer: "ਕਿਸਾਨ ਦਾ ਨਾਮ",
@@ -258,6 +363,9 @@ const translations = {
     mobile: "ਮੋਬਾਈਲ ਨੰਬਰ",
     otp: "ਓਟੀਪੀ",
     sendOtp: "ਓਟੀਪੀ ਭੇਜੋ",
+    greetingMorning: "ਸ਼ੁਭ ਸਵੇਰ",
+    greetingAfternoon: "ਸ਼ੁਭ ਦੁਪਹਿਰ",
+    greetingEvening: "ਸ਼ੁਭ ਸ਼ਾਮ",
   },
   Odia: {
     dashboard: "ଡ୍ୟାସବୋର୍ଡ",
@@ -267,7 +375,7 @@ const translations = {
     procurement: "ସଂଗ୍ରହ ସ୍ଥିତି",
     payments: "ଦେୟ",
     notifications: "ବିଜ୍ଞପ୍ତି",
-    bookNew: "ନୂଆ ସ୍ଲଟ୍ ବୁକ୍ କରନ୍ତୁ",
+    support: "ସାହାଯ୍ୟ",
     login: "ଲଗଇନ୍",
     logout: "ଲଗଆଉଟ୍",
     farmer: "ଚାଷୀଙ୍କ ନାମ",
@@ -275,6 +383,9 @@ const translations = {
     mobile: "ମୋବାଇଲ୍ ନମ୍ବର",
     otp: "ଓଟିପି",
     sendOtp: "ଓଟିପି ପଠାନ୍ତୁ",
+    greetingMorning: "ସୁପ୍ରଭାତ",
+    greetingAfternoon: "ଶୁଭ ଅପରାହ୍ନ",
+    greetingEvening: "ଶୁଭ ସନ୍ଧ୍ୟା",
   },
   Assamese: {
     dashboard: "ড্যাশব’ৰ্ড",
@@ -284,7 +395,7 @@ const translations = {
     procurement: "ক্ৰয়ৰ অৱস্থা",
     payments: "পৰিশোধ",
     notifications: "জাননী",
-    bookNew: "নতুন স্লট বুক কৰক",
+    support: "সহায়",
     login: "লগইন",
     logout: "লগআউট",
     farmer: "কৃষকৰ নাম",
@@ -292,159 +403,95 @@ const translations = {
     mobile: "মোবাইল নম্বৰ",
     otp: "অ’টিপি",
     sendOtp: "অ’টিপি পঠিয়াওক",
+    greetingMorning: "সুপ্ৰভাত",
+    greetingAfternoon: "শুভ আবেলি",
+    greetingEvening: "শুভ সন্ধ্যা",
   },
 };
-
-/* =====================================================
-   GET CURRENT LANGUAGE
-===================================================== */
 
 function getLanguage() {
   return localStorage.getItem("kisanLanguage") || "English";
 }
 
+function setLanguage(lang) {
+  if (!translations[lang]) lang = "English";
+  localStorage.setItem("kisanLanguage", lang);
+
+  if (loginLanguage) loginLanguage.value = lang;
+  if (topLanguage) topLanguage.value = lang;
+  if (sidebarLanguage) sidebarLanguage.value = lang;
+
+  updateGreeting();
+}
+
+if (loginLanguage) loginLanguage.addEventListener("change", (e) => setLanguage(e.target.value));
+if (topLanguage) topLanguage.addEventListener("change", (e) => setLanguage(e.target.value));
+if (sidebarLanguage) sidebarLanguage.addEventListener("change", (e) => setLanguage(e.target.value));
+
 /* =====================================================
-   SET LANGUAGE
+   LIVE CLOCK & DYNAMIC GREETING
 ===================================================== */
 
-function setLanguage(language) {
-  if (!translations[language]) {
-    language = "English";
+function updateLiveDateTime() {
+  const now = new Date();
+
+  // Date formatting: e.g. "28 August 2026, Thursday"
+  const optionsDate = { day: "numeric", month: "long", year: "numeric", weekday: "long" };
+  if (liveDate) {
+    liveDate.textContent = now.toLocaleDateString("en-IN", optionsDate);
   }
 
-  localStorage.setItem("kisanLanguage", language);
+  // Time formatting: e.g. "09:15 AM"
+  let hours = now.getHours();
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12;
+  const timeStr = `${String(hours).padStart(2, "0")}:${minutes} ${ampm}`;
 
-  /* Synchronize all dropdowns */
-  if (loginLanguage) loginLanguage.value = language;
-  if (dashboardLanguage) dashboardLanguage.value = language;
-  if (topLanguage) topLanguage.value = language;
-
-  const t = translations[language];
-
-  /* Login heading */
-  const loginHeading = document.querySelector(".login-heading h2");
-  if (loginHeading) {
-    const loginTexts = {
-      English: "Welcome Back",
-      Hindi: "वापसी पर स्वागत है",
-      Bengali: "স্বাগতম",
-      Marathi: "पुन्हा स्वागत आहे",
-      Telugu: "స్వాగతం",
-      Tamil: "மீண்டும் வரவேற்கிறோம்",
-      Gujarati: "સ્વાગત છે",
-      Kannada: "ಮತ್ತೆ ಸ್ವಾಗತ",
-      Malayalam: "വീണ്ടും സ്വാഗതം",
-      Punjabi: "ਜੀ ਆਇਆਂ ਨੂੰ",
-      Odia: "ସ୍ୱାଗତ",
-      Assamese: "স্বাগতম",
-    };
-    loginHeading.textContent = loginTexts[language] || "Welcome Back";
+  if (liveTime) {
+    liveTime.textContent = timeStr;
   }
+}
 
-  /* Farmer labels */
-  const labels = document.querySelectorAll(".form-group label");
-  if (labels[0]) labels[0].textContent = t.farmer;
-  if (labels[1]) labels[1].textContent = t.aadhaar;
-  if (labels[2]) labels[2].textContent = t.mobile;
+setInterval(updateLiveDateTime, 1000);
+updateLiveDateTime();
 
-  /* OTP */
-  const otpLabel = document.querySelector(".otp-heading label");
-  if (otpLabel) otpLabel.textContent = t.otp;
+function updateGreeting() {
+  const name = localStorage.getItem("farmerName") || "Ramesh Kumar";
+  const lang = getLanguage();
+  const t = translations[lang] || translations.English;
 
-  /* Send OTP */
-  const sendOtpBtn = document.getElementById("sendOtpBtn");
-  if (sendOtpBtn) {
-    sendOtpBtn.innerHTML = `<i class="fa-regular fa-paper-plane"></i> ${t.sendOtp}`;
+  const now = new Date();
+  const hr = now.getHours();
+  let greet = t.greetingMorning || "Good Morning";
+  if (hr >= 12 && hr < 17) greet = t.greetingAfternoon || "Good Afternoon";
+  else if (hr >= 17) greet = t.greetingEvening || "Good Evening";
+
+  if (headerGreeting) {
+    headerGreeting.innerHTML = `${greet}, <span id="headerFarmerName">${name}</span>! 👋`;
   }
+  if (sidebarFarmerName) sidebarFarmerName.textContent = name;
+  if (modalFarmerName) modalFarmerName.textContent = name;
 
-  /* Login */
-  if (loginBtn) {
-    loginBtn.innerHTML = `<i class="fa-solid fa-lock"></i> ${t.login}`;
-  }
+  const mobile = localStorage.getItem("farmerMobile") || "98765 43210";
+  if (sidebarFarmerMobile) sidebarFarmerMobile.textContent = mobile;
+  if (modalFarmerMobile) modalFarmerMobile.textContent = mobile;
 
-  /* Logout */
-  if (logoutBtn) {
-    logoutBtn.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> ${t.logout}`;
-  }
-
-  /* Book new slot */
-  if (newSlotBtn) {
-    newSlotBtn.innerHTML = `<i class="fa-regular fa-calendar"></i> ${t.bookNew}`;
-  }
-
-  updatePageTitle();
+  const farmerId = localStorage.getItem("farmerId") || "F1001";
+  if (modalFarmerId) modalFarmerId.textContent = `Farmer ID: ${farmerId}`;
 }
 
 /* =====================================================
-   PAGE TITLE
-===================================================== */
-
-function updatePageTitle() {
-  const language = getLanguage();
-  const t = translations[language];
-
-  if (!dashboardContent.classList.contains("hidden")) {
-    pageTitle.textContent = t.dashboard;
-  } else if (!bookContent.classList.contains("hidden")) {
-    pageTitle.textContent = t.book;
-  } else if (!queueContent.classList.contains("hidden")) {
-    pageTitle.textContent = t.queue;
-  } else if (produceContent && !produceContent.classList.contains("hidden")) {
-    pageTitle.textContent = t.produce || "My Produce";
-  } else if (procurementContent && !procurementContent.classList.contains("hidden")) {
-    pageTitle.textContent = t.procurement || "Procurement Status";
-  } else if (paymentsContent && !paymentsContent.classList.contains("hidden")) {
-    pageTitle.textContent = t.payments || "Payments";
-  } else if (notificationsContent && !notificationsContent.classList.contains("hidden")) {
-    pageTitle.textContent = t.notifications || "Notifications";
-  } else if (confirmationContent && !confirmationContent.classList.contains("hidden")) {
-    pageTitle.textContent = "Booking Confirmed";
-  }
-}
-
-/* =====================================================
-   INITIAL LANGUAGE
-===================================================== */
-
-setLanguage(getLanguage());
-
-/* =====================================================
-   LANGUAGE CHANGE
-===================================================== */
-
-if (loginLanguage) {
-  loginLanguage.addEventListener("change", function () {
-    setLanguage(this.value);
-  });
-}
-
-if (dashboardLanguage) {
-  dashboardLanguage.addEventListener("change", function () {
-    setLanguage(this.value);
-  });
-}
-
-if (topLanguage) {
-  topLanguage.addEventListener("change", function () {
-    setLanguage(this.value);
-  });
-}
-
-/* =====================================================
-   AADHAAR FORMAT
+   AADHAAR & MOBILE FORMATTERS (LOGIN)
 ===================================================== */
 
 if (aadhaarInput) {
   aadhaarInput.addEventListener("input", function () {
-    let value = this.value.replace(/\D/g, "").substring(0, 12);
-    let formatted = value.match(/.{1,4}/g);
-    this.value = formatted ? formatted.join(" ") : "";
+    let val = this.value.replace(/\D/g, "").substring(0, 12);
+    let chunks = val.match(/.{1,4}/g);
+    this.value = chunks ? chunks.join(" ") : "";
   });
 }
-
-/* =====================================================
-   MOBILE
-===================================================== */
 
 if (mobileInput) {
   mobileInput.addEventListener("input", function () {
@@ -452,35 +499,23 @@ if (mobileInput) {
   });
 }
 
-/* =====================================================
-   OTP
-===================================================== */
-
-const otpInputs = document.querySelectorAll(".otp-input");
-
-otpInputs.forEach((input, index) => {
+otpInputs.forEach((input, idx) => {
   input.addEventListener("input", function () {
     this.value = this.value.replace(/\D/g, "");
-    if (this.value && index < otpInputs.length - 1) {
-      otpInputs[index + 1].focus();
+    if (this.value && idx < otpInputs.length - 1) {
+      otpInputs[idx + 1].focus();
     }
   });
 
   input.addEventListener("keydown", function (e) {
-    if (e.key === "Backspace" && !this.value && index > 0) {
-      otpInputs[index - 1].focus();
+    if (e.key === "Backspace" && !this.value && idx > 0) {
+      otpInputs[idx - 1].focus();
     }
   });
 });
 
-/* =====================================================
-   SEND OTP
-===================================================== */
-
-const sendOtpButton = document.getElementById("sendOtpBtn");
-
-if (sendOtpButton) {
-  sendOtpButton.addEventListener("click", function () {
+if (sendOtpBtn) {
+  sendOtpBtn.addEventListener("click", function () {
     const mobile = mobileInput.value.trim();
     if (mobile.length !== 10) {
       alert("Please enter a valid 10-digit mobile number.");
@@ -492,7 +527,7 @@ if (sendOtpButton) {
 }
 
 /* =====================================================
-   LOGIN - CONNECTED TO BACKEND
+   LOGIN HANDLER - CONNECTED TO MONGODB
 ===================================================== */
 
 if (loginBtn) {
@@ -502,36 +537,23 @@ if (loginBtn) {
     const mobile = mobileInput.value.trim();
 
     let otp = "";
-    otpInputs.forEach((input) => {
-      otp += input.value;
-    });
+    otpInputs.forEach((inp) => (otp += inp.value));
 
-    /* Validations */
-    if (name === "") {
+    if (!name) {
       alert("Please enter farmer name.");
       farmerNameInput.focus();
       return;
     }
-
     if (aadhaar.length !== 12) {
       alert("Please enter a valid 12-digit Aadhaar number.");
       aadhaarInput.focus();
       return;
     }
-
     if (mobile.length !== 10) {
       alert("Please enter a valid 10-digit mobile number.");
       mobileInput.focus();
       return;
     }
-
-    if (otp.length !== 6) {
-      alert("Please enter the 6-digit OTP.");
-      otpInputs[0].focus();
-      return;
-    }
-
-    /* Demo OTP verification */
     if (otp !== "123456") {
       alert("Invalid OTP.\n\nFor demo use: 123456");
       return;
@@ -540,371 +562,807 @@ if (loginBtn) {
     loginBtn.disabled = true;
     loginBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Logging in...`;
 
-    // Connect to backend farmer login/register endpoint
-    const response = await apiCall("/farmers/login", "POST", {
-      name,
-      mobile,
-      aadhaar,
-    });
+    // Backend call to find/create farmer
+    const res = await apiCall("/farmers/login", "POST", { name, mobile, aadhaar });
 
     loginBtn.disabled = false;
-    loginBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Login`;
+    loginBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> Login`;
 
-    if (response && response.success && response.data) {
-      // Save farmer session
-      localStorage.setItem("farmerId", response.data.farmerId || "F1001");
-      localStorage.setItem("farmerName", response.data.name || name);
-      localStorage.setItem("farmerMobile", response.data.mobile || mobile);
+    if (res && res.success && res.data) {
+      localStorage.setItem("farmerId", res.data.farmerId || "F1001");
+      localStorage.setItem("farmerName", res.data.name || name);
+      localStorage.setItem("farmerMobile", res.data.mobile || mobile);
       localStorage.setItem("kisanLoggedIn", "true");
-
-      addNotification("Login Successful", `Welcome back, ${response.data.name}! Your account is synced with MongoDB.`);
-      showDashboard();
     } else {
-      // Offline fallback
-      console.warn("Backend login returned fallback. Proceeding with local session.");
       localStorage.setItem("farmerId", "F1001");
       localStorage.setItem("farmerName", name);
       localStorage.setItem("farmerMobile", mobile);
       localStorage.setItem("kisanLoggedIn", "true");
-      showDashboard();
     }
+
+    showDashboard();
   });
 }
 
-/* =====================================================
-   SHOW DASHBOARD
-===================================================== */
-
 function showDashboard() {
-  const savedName = localStorage.getItem("farmerName") || "Ramesh Kumar";
-
   loginPage.style.display = "none";
   dashboardPage.style.display = "block";
 
-  welcomeName.textContent = savedName;
-  sidebarFarmerName.textContent = savedName;
-  headerFarmerName.textContent = savedName;
-
+  updateGreeting();
   showPage("dashboard");
-  loadDashboardData();
+  loadAllDashboardData();
 }
 
 /* =====================================================
-   LOGOUT
+   LOGOUT HANDLER
 ===================================================== */
 
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", function () {
-    localStorage.removeItem("kisanLoggedIn");
-    localStorage.removeItem("farmerId");
-    localStorage.removeItem("farmerName");
-    localStorage.removeItem("farmerMobile");
+function handleLogout() {
+  localStorage.removeItem("kisanLoggedIn");
+  localStorage.removeItem("farmerId");
+  localStorage.removeItem("farmerName");
+  localStorage.removeItem("farmerMobile");
 
-    dashboardPage.style.display = "none";
-    loginPage.style.display = "flex";
+  dashboardPage.style.display = "none";
+  loginPage.style.display = "flex";
 
-    farmerNameInput.value = "";
-    aadhaarInput.value = "";
-    mobileInput.value = "";
-    otpInputs.forEach((input) => {
-      input.value = "";
-    });
-  });
+  if (profileModal) profileModal.classList.add("hidden");
+
+  if (farmerNameInput) farmerNameInput.value = "";
+  if (aadhaarInput) aadhaarInput.value = "";
+  if (mobileInput) mobileInput.value = "";
+  otpInputs.forEach((inp) => (inp.value = ""));
 }
+
+if (logoutBtn) logoutBtn.addEventListener("click", handleLogout);
 
 /* =====================================================
    PAGE NAVIGATION
 ===================================================== */
 
-function showPage(page) {
-  const pages = [
-    dashboardContent,
-    bookContent,
-    queueContent,
-    confirmationContent,
-    produceContent,
-    procurementContent,
-    paymentsContent,
-    notificationsContent,
-  ];
+const allPages = [
+  dashboardContent,
+  bookContent,
+  queueContent,
+  produceContent,
+  procurementContent,
+  paymentsContent,
+  notificationsContent,
+  supportContent,
+  confirmationContent,
+];
 
-  pages.forEach((p) => {
+function showPage(pageName) {
+  allPages.forEach((p) => {
     if (p) p.classList.add("hidden");
   });
 
-  document.querySelectorAll(".nav-item").forEach((nav) => {
-    nav.classList.remove("active");
-    if (nav.getAttribute("data-page") === page) {
-      nav.classList.add("active");
+  document.querySelectorAll(".sidebar-nav .nav-item").forEach((btn) => {
+    btn.classList.remove("active");
+    if (btn.getAttribute("data-page") === pageName) {
+      btn.classList.add("active");
     }
   });
 
-  if (page === "dashboard" && dashboardContent) {
+  if (pageName === "dashboard" && dashboardContent) {
     dashboardContent.classList.remove("hidden");
-    loadDashboardData();
-  } else if (page === "book" && bookContent) {
+    loadAllDashboardData();
+  } else if (pageName === "book" && bookContent) {
     bookContent.classList.remove("hidden");
-  } else if (page === "queue" && queueContent) {
+    initBookingForm();
+  } else if (pageName === "queue" && queueContent) {
     queueContent.classList.remove("hidden");
-    loadQueueData();
-  } else if (page === "confirmation" && confirmationContent) {
-    confirmationContent.classList.remove("hidden");
-  } else if (page === "produce" && produceContent) {
+    loadQueueViewData();
+  } else if (pageName === "produce" && produceContent) {
     produceContent.classList.remove("hidden");
-    loadProduceData();
-  } else if (page === "procurement" && procurementContent) {
+    loadProduceViewData();
+  } else if (pageName === "procurement" && procurementContent) {
     procurementContent.classList.remove("hidden");
-    loadProcurementData();
-  } else if (page === "payments" && paymentsContent) {
+    loadProcurementViewData();
+  } else if (pageName === "payments" && paymentsContent) {
     paymentsContent.classList.remove("hidden");
-    loadPaymentsData();
-  } else if (page === "notifications" && notificationsContent) {
+    loadPaymentsViewData();
+  } else if (pageName === "notifications" && notificationsContent) {
     notificationsContent.classList.remove("hidden");
+    loadNotificationsViewData();
+  } else if (pageName === "support" && supportContent) {
+    supportContent.classList.remove("hidden");
+  } else if (pageName === "confirmation" && confirmationContent) {
+    confirmationContent.classList.remove("hidden");
   }
 
-  updatePageTitle();
+  window.scrollTo({ top: 0, behavior: "smooth" });
   if (sidebar) sidebar.classList.remove("open");
 }
 
-/* Navigation Click Listeners */
-document.querySelectorAll(".nav-item").forEach((item) => {
+// Nav items click
+document.querySelectorAll(".sidebar-nav .nav-item").forEach((item) => {
   item.addEventListener("click", function () {
-    const page = this.getAttribute("data-page");
-    if (page) {
-      showPage(page);
+    const p = this.getAttribute("data-page");
+    if (p === "voice") {
+      openVoiceModal();
+    } else if (p) {
+      showPage(p);
     }
   });
 });
 
-/* Quick Actions Listeners */
-document.querySelectorAll(".quick-action").forEach((item) => {
-  item.addEventListener("click", function () {
-    const page = this.getAttribute("data-page");
-    if (page) {
-      showPage(page);
-    }
-  });
-});
-
-/* Back to Dashboard buttons */
-if (backDashboard) {
-  backDashboard.addEventListener("click", () => showPage("dashboard"));
-}
-
-document.querySelectorAll(".back-dashboard-trigger").forEach((btn) => {
+// Back to Dashboard buttons
+document.querySelectorAll(".back-to-dash-btn").forEach((btn) => {
   btn.addEventListener("click", () => showPage("dashboard"));
 });
 
-/* Mobile Menu */
-if (mobileMenu) {
-  mobileMenu.addEventListener("click", function () {
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener("click", () => {
     sidebar.classList.toggle("open");
   });
 }
 
-/* Book new slot button */
-if (newSlotBtn) {
-  newSlotBtn.addEventListener("click", function () {
-    showPage("book");
+/* =====================================================
+   LOAD ALL DASHBOARD DATA - CONNECTED TO BACKEND
+===================================================== */
+
+async function loadAllDashboardData() {
+  const farmerId = localStorage.getItem("farmerId") || "F1001";
+  const selectedCentre = localStorage.getItem("kisanSelectedCentre") || "Centre A, Bhagalpur";
+
+  if (stripCentreName) stripCentreName.textContent = selectedCentre;
+  if (lqCentreHeader) lqCentreHeader.textContent = selectedCentre.toUpperCase();
+  if (routeCentreName) routeCentreName.textContent = selectedCentre;
+
+  // 1. Fetch Farmer Queue Status from backend
+  const queueRes = await apiCall(`/queue/farmer/${farmerId}`);
+
+  let token = "A-018";
+  let ahead = 6;
+  let wait = 42;
+  let bookingId = localStorage.getItem("kisanCurrentBookingId");
+
+  if (queueRes && queueRes.success && queueRes.data) {
+    const qData = queueRes.data;
+    token = qData.token || "A-018";
+    ahead = typeof qData.farmersAhead === "number" ? qData.farmersAhead : 6;
+    wait = ahead > 0 ? ahead * 7 : 0;
+    bookingId = qData.bookingId || bookingId;
+    if (bookingId) localStorage.setItem("kisanCurrentBookingId", bookingId);
+  } else {
+    // Check saved local booking
+    const saved = loadSavedBooking();
+    if (saved && saved.token) {
+      token = saved.token;
+      ahead = typeof saved.queueAhead === "number" ? saved.queueAhead : 6;
+      wait = ahead * 7;
+    }
+  }
+
+  // Update Card 1: YOUR TURN STATUS
+  if (dashToken) dashToken.textContent = token;
+  if (notifTokenVal) notifTokenVal.textContent = token;
+  if (dashAhead) dashAhead.textContent = `${ahead} farmers ahead of you`;
+  if (dashWait) dashWait.textContent = ahead === 0 ? "Your Turn Now!" : `${wait} mins`;
+
+  if (dashNotifyThreshold) {
+    dashNotifyThreshold.textContent = `${Math.max(1, ahead - 1)} farmers`;
+  }
+
+  // Update Segmented Bar (8 segments)
+  if (dashSegmentedBar) {
+    const totalSegments = 8;
+    const filledCount = Math.max(1, Math.min(totalSegments, totalSegments - Math.floor(ahead / 2)));
+    dashSegmentedBar.innerHTML = "";
+    for (let i = 0; i < totalSegments; i++) {
+      const seg = document.createElement("div");
+      seg.className = `segment ${i < filledCount ? "filled" : "empty"}`;
+      dashSegmentedBar.appendChild(seg);
+    }
+  }
+
+  // 2. Update Card 2: WHEN SHOULD I LEAVE?
+  updateDepartureCard(wait);
+
+  // 3. Update Card 3: NEXT STEP & SMART WAIT from Booking & Procurement
+  if (bookingId) {
+    const procRes = await apiCall(`/procurement/${bookingId}`);
+    if (procRes && procRes.success && procRes.data) {
+      const pStage = procRes.data.procurementStatus || "QUALITY_CHECK";
+      if (dashNextStageName) dashNextStageName.textContent = formatStageName(pStage);
+    }
+
+    const bookRes = await apiCall(`/bookings/${bookingId}`);
+    if (bookRes && bookRes.success && bookRes.data) {
+      const bData = bookRes.data;
+      if (dashNextCrop) dashNextCrop.textContent = bData.crop || "Wheat";
+      if (headerCropName) headerCropName.textContent = bData.crop || "Wheat";
+      if (notifSlotDate) {
+        const d = bData.date ? new Date(bData.date).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "28 Aug 2026";
+        notifSlotDate.textContent = `${d} (${bData.slot || "10:00 AM - 11:00 AM"})`;
+      }
+      if (notifCentreName) notifCentreName.textContent = bData.centreId || selectedCentre;
+
+      const estAmount = Math.round((bData.quantity || 50) * 22.75);
+      if (notifPaymentVal) notifPaymentVal.textContent = `₹${estAmount.toLocaleString("en-IN")}`;
+    }
+  }
+
+  // 4. Update Bottom Right: LIVE QUEUE AT CENTRE A
+  const centreRes = await apiCall(`/queue/${encodeURIComponent(selectedCentre)}`);
+  let servingToken = "A-012";
+  let servingName = "Mahendra Singh";
+
+  if (centreRes && centreRes.success && centreRes.data && centreRes.data.nowServing) {
+    servingToken = centreRes.data.nowServing;
+    servingName = "Active Farmer";
+  }
+
+  if (lqNowServing) lqNowServing.textContent = servingToken;
+  if (lqCurrentFarmerName) lqCurrentFarmerName.textContent = servingName;
+  if (lqFarmersAhead) lqFarmersAhead.textContent = ahead;
+  if (lqEstimatedWait) lqEstimatedWait.textContent = ahead === 0 ? "Now" : `${wait} mins`;
+
+  // Render Visual Queue Avatar Track with "You" marker
+  renderQueueAvatarsTrack(token, ahead);
+}
+
+function updateDepartureCard(waitMinutes) {
+  const now = new Date();
+  const travelMins = 18;
+  const bufferMins = 10;
+
+  // Expected arrival = now + wait time
+  const arrivalDate = new Date(now.getTime() + (waitMinutes > 0 ? waitMinutes : 30) * 60000);
+  const leaveDate = new Date(arrivalDate.getTime() - (travelMins + bufferMins) * 60000);
+
+  const fmtTime = (d) => {
+    let h = d.getHours();
+    const m = String(d.getMinutes()).padStart(2, "0");
+    const ap = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12;
+    return `${String(h).padStart(2, "0")}:${m} ${ap}`;
+  };
+
+  const leaveStr = fmtTime(leaveDate);
+  const arrivalStr = fmtTime(arrivalDate);
+
+  if (dashLeaveTime) dashLeaveTime.textContent = leaveStr;
+  if (dashArrivalTime) dashArrivalTime.textContent = arrivalStr;
+  if (dashExpectedTurnTime) dashExpectedTurnTime.textContent = arrivalStr;
+  if (dashRemindAtTime) dashRemindAtTime.textContent = leaveStr;
+}
+
+function formatStageName(stage) {
+  const names = {
+    BOOKED: "Gate Check-in",
+    CHECKED_IN: "Waiting Bay Entry",
+    WAITING: "Inspector Review",
+    PROCESSING: "Quality Check",
+    QUALITY_CHECK: "Quality Check",
+    WEIGHING: "Electronic Weighing",
+    COMPLETED: "Procurement Completed",
+  };
+  return names[stage] || stage;
+}
+
+/* =====================================================
+   RENDER QUEUE AVATARS TRACK (SCREENSHOT MATCH)
+===================================================== */
+
+function renderQueueAvatarsTrack(userToken, farmersAhead) {
+  if (!queueAvatarsTrack) return;
+  queueAvatarsTrack.innerHTML = "";
+
+  const totalTrackFigures = 18;
+  const youPosition = 12; // visual index for current user
+
+  for (let i = 1; i <= totalTrackFigures; i++) {
+    const avatar = document.createElement("div");
+    avatar.className = "track-avatar";
+
+    if (i === youPosition) {
+      avatar.classList.add("current-user");
+      avatar.innerHTML = `
+        <span class="you-badge">You</span>
+        <i class="fa-solid fa-user"></i>
+      `;
+    } else if (i < youPosition) {
+      avatar.classList.add("served");
+      avatar.innerHTML = `<i class="fa-solid fa-user"></i>`;
+    } else {
+      avatar.innerHTML = `<i class="fa-solid fa-user"></i>`;
+    }
+
+    queueAvatarsTrack.appendChild(avatar);
+  }
+
+  if (trackStartToken) trackStartToken.textContent = "A-001";
+  if (trackEndToken) trackEndToken.textContent = "A-024";
+}
+
+/* =====================================================
+   LISTEN TO UPDATE (SPEECH SYNTHESIS)
+===================================================== */
+
+if (listenUpdateBtn) {
+  listenUpdateBtn.addEventListener("click", function () {
+    const farmerName = localStorage.getItem("farmerName") || "Ramesh Kumar";
+    const token = dashToken?.textContent || "A-018";
+    const ahead = dashAhead?.textContent || "6 farmers ahead of you";
+    const wait = dashWait?.textContent || "42 mins";
+    const centre = stripCentreName?.textContent || "Centre A, Bhagalpur";
+
+    const speechText = `Namaste ${farmerName}. Your procurement token is ${token} at ${centre}. There are ${ahead}. Estimated wait time is ${wait}. Please arrive on time.`;
+
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(speechText);
+      utterance.rate = 0.95;
+      utterance.pitch = 1.0;
+      window.speechSynthesis.speak(utterance);
+
+      listenUpdateBtn.innerHTML = `<i class="fa-solid fa-volume-high fa-bounce"></i> <span>Playing Update...</span>`;
+      utterance.onend = () => {
+        listenUpdateBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i> <span>Listen to Update</span>`;
+      };
+    } else {
+      alert(speechText);
+    }
   });
 }
 
-/* Time Slot Selection */
-document.querySelectorAll(".time-slots button").forEach((button) => {
-  button.addEventListener("click", function () {
-    document.querySelectorAll(".time-slots button").forEach((btn) => {
-      btn.classList.remove("selected");
-    });
-    this.classList.add("selected");
+/* =====================================================
+   VOICE ASSISTANT (WEB SPEECH API)
+===================================================== */
+
+let recognition = null;
+if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRec();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = "en-IN";
+
+  recognition.onresult = function (event) {
+    const transcript = event.results[0][0].transcript.toLowerCase();
+    if (voiceTranscript) voiceTranscript.textContent = `"${transcript}"`;
+    handleVoiceCommand(transcript);
+  };
+
+  recognition.onerror = function (event) {
+    if (voiceStatusText) voiceStatusText.textContent = "Listening paused. Tap command below or try again.";
+  };
+
+  recognition.onend = function () {
+    if (voiceStatusText) voiceStatusText.textContent = "Done listening. Processing command...";
+  };
+}
+
+function openVoiceModal() {
+  if (voiceModal) voiceModal.classList.remove("hidden");
+  if (voiceStatusText) voiceStatusText.textContent = "Listening... Speak your command now.";
+  if (voiceTranscript) voiceTranscript.textContent = "Listening...";
+
+  if (recognition) {
+    try {
+      recognition.start();
+    } catch (e) {
+      // already started
+    }
+  }
+}
+
+function closeVoice() {
+  if (voiceModal) voiceModal.classList.add("hidden");
+  if (recognition) {
+    try {
+      recognition.stop();
+    } catch (e) {}
+  }
+}
+
+if (headerVoiceBtn) headerVoiceBtn.addEventListener("click", openVoiceModal);
+if (sidebarVoiceBtn) sidebarVoiceBtn.addEventListener("click", openVoiceModal);
+if (closeVoiceModal) closeVoiceModal.addEventListener("click", closeVoice);
+
+function handleVoiceCommand(cmd) {
+  setTimeout(() => {
+    closeVoice();
+
+    if (cmd.includes("dashboard") || cmd.includes("home")) {
+      showPage("dashboard");
+      speakFeedback("Opening your dashboard.");
+    } else if (cmd.includes("book") || cmd.includes("slot")) {
+      showPage("book");
+      speakFeedback("Opening slot booking.");
+    } else if (cmd.includes("turn") || cmd.includes("queue")) {
+      showPage("queue");
+      speakFeedback("Showing your live queue turn.");
+    } else if (cmd.includes("produce") || cmd.includes("crop")) {
+      showPage("produce");
+      speakFeedback("Opening your produce details.");
+    } else if (cmd.includes("procurement") || cmd.includes("status")) {
+      showPage("procurement");
+      speakFeedback("Showing procurement workflow status.");
+    } else if (cmd.includes("payment") || cmd.includes("rupee") || cmd.includes("money")) {
+      showPage("payments");
+      speakFeedback("Opening DBT payments tracker.");
+    } else if (cmd.includes("notification") || cmd.includes("alert")) {
+      showPage("notifications");
+      speakFeedback("Showing your notifications.");
+    } else {
+      speakFeedback(`Understood: ${cmd}. Showing dashboard.`);
+      showPage("dashboard");
+    }
+  }, 1000);
+}
+
+function speakFeedback(text) {
+  if ("speechSynthesis" in window) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 1.0;
+    window.speechSynthesis.speak(u);
+  }
+}
+
+// Voice hint chips
+document.querySelectorAll(".voice-hint-chip").forEach((chip) => {
+  chip.addEventListener("click", function () {
+    const cmd = this.getAttribute("data-cmd");
+    handleVoiceCommand(cmd);
   });
 });
 
 /* =====================================================
-   NOTIFICATION MANAGER
+   VIEW ROUTE MODAL
 ===================================================== */
 
-function addNotification(title, message) {
-  const list = document.getElementById("notificationsList");
-  if (!list) return;
+if (viewRouteBtn) {
+  viewRouteBtn.addEventListener("click", () => {
+    if (routeModal) routeModal.classList.remove("hidden");
+  });
+}
 
-  const item = document.createElement("div");
-  item.className = "update-item";
-  item.innerHTML = `
-    <i class="fa-solid fa-circle-check"></i>
-    <div>
-      <strong>${title}</strong>
-      <span>${message}</span>
-    </div>
-  `;
-  list.insertBefore(item, list.firstChild);
+if (closeRouteModal) {
+  closeRouteModal.addEventListener("click", () => {
+    if (routeModal) routeModal.classList.add("hidden");
+  });
+}
+
+if (openGoogleMapsBtn) {
+  openGoogleMapsBtn.addEventListener("click", () => {
+    const centre = stripCentreName?.textContent || "Bhagalpur Mandi";
+    window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(centre)}`, "_blank");
+  });
 }
 
 /* =====================================================
-   LOAD DASHBOARD DATA - CONNECTED TO BACKEND
+   CHANGE CENTRE MODAL
 ===================================================== */
 
-async function loadDashboardData() {
-  const farmerId = localStorage.getItem("farmerId") || "F1001";
+function openCentreModal() {
+  if (centreModal) centreModal.classList.remove("hidden");
+}
 
-  // Elements on Dashboard
-  const dashToken = document.getElementById("dashToken");
-  const dashAhead = document.getElementById("dashAhead");
-  const dashWait = document.getElementById("dashWait");
-  const dashProgress = document.getElementById("dashProgress");
-  const dashSlotDate = document.getElementById("dashSlotDate");
-  const dashSlotTime = document.getElementById("dashSlotTime");
-  const dashSlotCentre = document.getElementById("dashSlotCentre");
+if (changeCentreBtn) changeCentreBtn.addEventListener("click", openCentreModal);
+if (noticeOtherCentresBtn) noticeOtherCentresBtn.addEventListener("click", openCentreModal);
+if (closeCentreModal) closeCentreModal.addEventListener("click", () => centreModal.classList.add("hidden"));
 
-  // Fetch queue status for this farmer from Backend
-  const queueRes = await apiCall(`/queue/farmer/${farmerId}`);
+document.querySelectorAll(".centre-option").forEach((opt) => {
+  opt.addEventListener("click", function () {
+    const newCentre = this.getAttribute("data-centre");
+    localStorage.setItem("kisanSelectedCentre", newCentre);
 
-  if (queueRes && queueRes.success && queueRes.data) {
-    const data = queueRes.data;
-    if (dashToken) dashToken.textContent = data.token;
-    if (dashAhead) dashAhead.textContent = `${data.farmersAhead} farmers ahead of you`;
+    document.querySelectorAll(".centre-option").forEach((o) => o.classList.remove("active"));
+    this.classList.add("active");
 
-    const waitMins = data.farmersAhead > 0 ? `${data.farmersAhead * 7} mins` : "Your Turn Now!";
-    if (dashWait) dashWait.textContent = waitMins;
+    centreModal.classList.add("hidden");
+    loadAllDashboardData();
+  });
+});
 
-    if (dashProgress) {
-      const pct = Math.max(10, Math.min(100, 100 - data.farmersAhead * 15));
-      dashProgress.style.width = `${pct}%`;
-    }
+/* =====================================================
+   FARMER PROFILE MODAL
+===================================================== */
 
-    if (data.bookingId) {
-      localStorage.setItem("kisanCurrentBookingId", data.bookingId);
-      // Fetch booking details
-      const bookingRes = await apiCall(`/bookings/${data.bookingId}`);
-      if (bookingRes && bookingRes.success && bookingRes.data) {
-        const b = bookingRes.data;
-        if (dashSlotTime) dashSlotTime.textContent = b.slot || "10:00 - 11:00 AM";
-        if (dashSlotCentre) dashSlotCentre.textContent = b.centreId || "Centre A, Bhagalpur";
-        if (dashSlotDate && b.date) {
-          const d = new Date(b.date);
-          dashSlotDate.textContent = d.toLocaleDateString("en-IN", { month: "short", day: "numeric" });
-        }
-      }
-    }
-  } else {
-    // If no active booking from API, check localStorage backup or show idle state
-    const saved = loadSavedBooking();
-    if (saved) {
-      if (dashToken) dashToken.textContent = saved.token;
-      if (dashAhead) dashAhead.textContent = `${saved.queueAhead || 0} farmers ahead of you`;
-      if (dashWait) dashWait.textContent = saved.estimatedWait || "--";
-      if (dashSlotTime) dashSlotTime.textContent = saved.time || "10:00 - 11:00 AM";
-      if (dashSlotCentre) dashSlotCentre.textContent = saved.centre || "Centre A, Bhagalpur";
-    } else {
-      if (dashToken) dashToken.textContent = "--";
-      if (dashAhead) dashAhead.textContent = "No active queue token";
-      if (dashWait) dashWait.textContent = "--";
-      if (dashSlotTime) dashSlotTime.textContent = "No slot booked";
-      if (dashSlotCentre) dashSlotCentre.textContent = "Book a slot to get started";
-    }
+if (sidebarFarmerCard) {
+  sidebarFarmerCard.addEventListener("click", () => {
+    updateGreeting();
+    if (profileModal) profileModal.classList.remove("hidden");
+  });
+}
+
+if (closeProfileModal) {
+  closeProfileModal.addEventListener("click", () => {
+    if (profileModal) profileModal.classList.add("hidden");
+  });
+}
+
+/* =====================================================
+   QUICK ACTION BUTTONS
+===================================================== */
+
+if (qaCallCentre) {
+  qaCallCentre.addEventListener("click", () => {
+    showActionModal("Call Centre", `
+      <p>Direct Mandi Support Desk: <a href="tel:18001801551" style="color:#079447; font-weight:700;">1800-180-1551</a> (Toll Free)</p>
+      <p>Centre A Duty Officer: <a href="tel:+919876543210" style="color:#079447; font-weight:700;">+91 98765 43210</a></p>
+      <p style="margin-top:10px; font-size:12px; color:#64748b;">Available from 06:00 AM to 10:00 PM daily for gate, weighing, and token support.</p>
+    `);
+  });
+}
+
+if (qaMessageCentre) {
+  qaMessageCentre.addEventListener("click", () => {
+    showActionModal("Message Centre", `
+      <p>Send an SMS or WhatsApp inquiry regarding your produce batch or gate clearance.</p>
+      <textarea style="width:100%; height:70px; border-radius:8px; border:1px solid #cbd5e1; padding:8px; margin:10px 0; font-family:inherit;" placeholder="Type your query for Mandi Officer..."></textarea>
+      <button class="primary-green-btn" onclick="alert('Message sent to Mandi Support Desk!'); actionModal.classList.add('hidden');">Send Query</button>
+    `);
+  });
+}
+
+if (qaOtherFarmers) {
+  qaOtherFarmers.addEventListener("click", () => {
+    showActionModal("Other Farmers Community", `
+      <p>Connect with other farmers currently queued at <strong>${stripCentreName?.textContent || "Centre A"}</strong>.</p>
+      <div style="background:#f8fafc; padding:12px; border-radius:8px; margin-top:10px;">
+        <p style="margin:0; font-weight:600;">🌾 Wheat unloading running smoothly at Weighbridge 2.</p>
+        <small style="color:#94a3b8;">Shared by Suraj Singh (10 mins ago)</small>
+      </div>
+    `);
+  });
+}
+
+if (qaLearnMore) {
+  qaLearnMore.addEventListener("click", () => {
+    showActionModal("Procurement Guide & Standards", `
+      <h4>Mandatory Mandi Requirements:</h4>
+      <ul style="margin:10px 0 10px 20px; font-size:13px; color:#334155;">
+        <li>Produce moisture below 12% for Wheat & Maize.</li>
+        <li>Carry original Aadhaar and bank passbook photocopy.</li>
+        <li>Present token QR code or SMS at security gate.</li>
+        <li>Payments processed electronically through PFMS portal.</li>
+      </ul>
+    `);
+  });
+}
+
+function showActionModal(title, contentHtml) {
+  if (actionModalTitle) actionModalTitle.textContent = title;
+  if (actionModalBody) actionModalBody.innerHTML = contentHtml;
+  if (actionModal) actionModal.classList.remove("hidden");
+}
+
+if (closeActionModal) {
+  closeActionModal.addEventListener("click", () => actionModal.classList.add("hidden"));
+}
+
+/* =====================================================
+   VIEW FULL PROCESS & FULL QUEUE LINKS
+===================================================== */
+
+if (viewFullProcessBtn) {
+  viewFullProcessBtn.addEventListener("click", () => showPage("procurement"));
+}
+
+if (viewFullQueueBtn) {
+  viewFullQueueBtn.addEventListener("click", () => showPage("queue"));
+}
+
+if (headerNotifBtn) {
+  headerNotifBtn.addEventListener("click", () => showPage("notifications"));
+}
+
+/* =====================================================
+   BOOKING VIEW INITIALIZATION & SUBMIT
+===================================================== */
+
+function initBookingForm() {
+  const dateInput = document.getElementById("bookingDateInput");
+  if (dateInput && !dateInput.value) {
+    const today = new Date().toISOString().split("T")[0];
+    dateInput.value = today;
   }
 }
 
+// Crop Chips Click
+document.querySelectorAll(".crop-chip").forEach((chip) => {
+  chip.addEventListener("click", function () {
+    document.querySelectorAll(".crop-chip").forEach((c) => c.classList.remove("selected"));
+    this.classList.add("selected");
+    const crop = this.getAttribute("data-crop");
+    const hiddenCrop = document.getElementById("bookingCropSelect");
+    if (hiddenCrop) hiddenCrop.value = crop;
+  });
+});
+
+// Time Slot Buttons Click
+document.querySelectorAll(".time-slot-btn").forEach((btn) => {
+  btn.addEventListener("click", function () {
+    document.querySelectorAll(".time-slot-btn").forEach((b) => b.classList.remove("selected"));
+    this.classList.add("selected");
+  });
+});
+
+// Confirm Slot Button
+const confirmSlotBtn = document.getElementById("confirmSlotBtn");
+if (confirmSlotBtn) {
+  confirmSlotBtn.addEventListener("click", async function () {
+    const centre = document.getElementById("bookingCentreSelect")?.value || "Centre A, Bhagalpur";
+    const crop = document.getElementById("bookingCropSelect")?.value || "Wheat";
+    const quantity = document.getElementById("bookingQuantityInput")?.value || "50";
+    const selectedDate = document.getElementById("bookingDateInput")?.value;
+    const selectedSlotBtn = document.querySelector(".time-slot-btn.selected");
+    const slotText = selectedSlotBtn ? selectedSlotBtn.textContent.trim() : "10:00 - 11:00 AM";
+
+    if (!selectedDate) {
+      alert("Please select a procurement date.");
+      return;
+    }
+    if (Number(quantity) <= 0) {
+      alert("Please enter a valid produce quantity in kg.");
+      return;
+    }
+
+    confirmSlotBtn.disabled = true;
+    confirmSlotBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Confirming...`;
+
+    const farmerId = localStorage.getItem("farmerId") || "F1001";
+    const payload = {
+      farmerId,
+      centreId: centre,
+      crop,
+      quantity: Number(quantity),
+      date: selectedDate,
+      slot: slotText,
+    };
+
+    const res = await apiCall("/bookings", "POST", payload);
+
+    confirmSlotBtn.disabled = false;
+    confirmSlotBtn.innerHTML = `<i class="fa-solid fa-calendar-check"></i> <span>Confirm Slot & Generate Token</span>`;
+
+    let token = "A-018";
+    let bookingId = `KQ-${Date.now().toString().slice(-8)}`;
+
+    if (res && res.success && res.data) {
+      token = res.data.token || token;
+      bookingId = res.data.bookingId || bookingId;
+      localStorage.setItem("kisanCurrentBookingId", bookingId);
+    }
+
+    const bookingRecord = {
+      bookingId,
+      token,
+      farmerName: localStorage.getItem("farmerName") || "Farmer",
+      centre,
+      crop,
+      quantity: `${quantity} kg`,
+      date: selectedDate,
+      time: slotText,
+      queueAhead: res?.data?.position ? res.data.position - 1 : 6,
+      estimatedWait: res?.data?.position ? `${(res.data.position - 1) * 7} mins` : "42 mins",
+    };
+
+    localStorage.setItem("kisanBooking", JSON.stringify(bookingRecord));
+    localStorage.setItem("kisanSelectedCentre", centre);
+
+    // Update Confirmation Slip
+    const confToken = document.getElementById("confirmationToken");
+    const confId = document.getElementById("confirmationBookingId");
+    const confCentre = document.getElementById("confirmationCentre");
+    const confCrop = document.getElementById("confirmationCrop");
+    const confQty = document.getElementById("confirmationQuantity");
+    const confDate = document.getElementById("confirmationDate");
+    const confTime = document.getElementById("confirmationTime");
+
+    if (confToken) confToken.textContent = token;
+    if (confId) confId.textContent = bookingId;
+    if (confCentre) confCentre.textContent = centre;
+    if (confCrop) confCrop.textContent = crop;
+    if (confQty) confQty.textContent = `${quantity} kg`;
+    if (confDate) confDate.textContent = selectedDate;
+    if (confTime) confTime.textContent = slotText;
+
+    showPage("confirmation");
+  });
+}
+
+const confDashBtn = document.getElementById("confirmationDashboardBtn");
+if (confDashBtn) confDashBtn.addEventListener("click", () => showPage("dashboard"));
+
+const confTurnBtn = document.getElementById("confirmationTurnBtn");
+if (confTurnBtn) confTurnBtn.addEventListener("click", () => showPage("queue"));
+
 /* =====================================================
-   LOAD QUEUE DATA - CONNECTED TO BACKEND
+   MY TURN VIEW DATA
 ===================================================== */
 
-async function loadQueueData() {
+async function loadQueueViewData() {
   const farmerId = localStorage.getItem("farmerId") || "F1001";
+  const selectedCentre = localStorage.getItem("kisanSelectedCentre") || "Centre A, Bhagalpur";
+
+  const queueRes = await apiCall(`/queue/farmer/${farmerId}`);
+  let token = "A-018";
+  let ahead = 6;
+  let wait = 42;
+
+  if (queueRes && queueRes.success && queueRes.data) {
+    token = queueRes.data.token || token;
+    ahead = typeof queueRes.data.farmersAhead === "number" ? queueRes.data.farmersAhead : ahead;
+    wait = ahead * 7;
+  }
+
+  const qBigToken = document.getElementById("queueBigToken");
+  const qAheadText = document.getElementById("queueAheadText");
+  const qAheadCount = document.getElementById("queueAheadCount");
+  const qEstWait = document.getElementById("queueEstimatedWait");
+  const qProgress = document.getElementById("queueProgressBar");
+  const qNowServing = document.getElementById("queueNowServing");
+  const rosterUser = document.getElementById("rosterUserName");
+
+  if (qBigToken) qBigToken.textContent = token;
+  if (qAheadText) qAheadText.textContent = `${ahead} farmers are ahead of you.`;
+  if (qAheadCount) qAheadCount.textContent = ahead;
+  if (qEstWait) qEstWait.textContent = ahead === 0 ? "Now" : `${wait} mins`;
+
+  if (qProgress) {
+    const pct = Math.max(10, Math.min(100, 100 - ahead * 12));
+    qProgress.style.width = `${pct}%`;
+  }
+
+  const centreRes = await apiCall(`/queue/${encodeURIComponent(selectedCentre)}`);
+  if (centreRes && centreRes.success && centreRes.data && centreRes.data.nowServing) {
+    if (qNowServing) qNowServing.textContent = centreRes.data.nowServing;
+  }
+
+  const name = localStorage.getItem("farmerName") || "Ramesh Kumar";
+  if (rosterUser) rosterUser.textContent = `${name} (You)`;
+}
+
+const refreshQueueBtn = document.getElementById("refreshQueueBtn");
+if (refreshQueueBtn) {
+  refreshQueueBtn.addEventListener("click", function () {
+    refreshQueueBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate fa-spin"></i> Refreshing...`;
+    loadQueueViewData().then(() => {
+      setTimeout(() => {
+        refreshQueueBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i> Refresh`;
+      }, 500);
+    });
+  });
+}
+
+/* =====================================================
+   MY PRODUCE VIEW DATA
+===================================================== */
+
+async function loadProduceViewData() {
   const bookingId = localStorage.getItem("kisanCurrentBookingId");
-
-  const queueBigToken = document.getElementById("queueBigToken");
-  const queueAheadText = document.getElementById("queueAheadText");
-  const queueAheadCount = document.getElementById("queueAheadCount");
-  const queueEstimatedWait = document.getElementById("queueEstimatedWait");
-  const queueNowServing = document.getElementById("queueNowServing");
-  const queueProgressBar = document.getElementById("queueProgressBar");
-
-  const queueRes = await apiCall(`/queue/farmer/${farmerId}`);
-
-  if (queueRes && queueRes.success && queueRes.data) {
-    const data = queueRes.data;
-    if (queueBigToken) queueBigToken.textContent = data.token;
-    if (queueAheadText) queueAheadText.textContent = `${data.farmersAhead} farmers are ahead of you.`;
-    if (queueAheadCount) queueAheadCount.textContent = data.farmersAhead;
-
-    const waitMins = data.farmersAhead > 0 ? `${data.farmersAhead * 7} mins` : "Your Turn!";
-    if (queueEstimatedWait) queueEstimatedWait.textContent = waitMins;
-
-    if (queueProgressBar) {
-      const pct = Math.max(10, Math.min(100, 100 - data.farmersAhead * 15));
-      queueProgressBar.style.width = `${pct}%`;
-    }
-
-    // Also fetch centre queue for Now Serving info
-    const savedBooking = loadSavedBooking();
-    const centreId = (savedBooking && savedBooking.centre) || "Centre A, Bhagalpur";
-    const centreRes = await apiCall(`/queue/${encodeURIComponent(centreId)}`);
-
-    if (centreRes && centreRes.success && centreRes.data && centreRes.data.nowServing) {
-      if (queueNowServing) queueNowServing.textContent = centreRes.data.nowServing;
-    } else {
-      if (queueNowServing) queueNowServing.textContent = data.farmersAhead === 0 ? data.token : "A-001";
-    }
-  } else {
-    const saved = loadSavedBooking();
-    if (saved) {
-      if (queueBigToken) queueBigToken.textContent = saved.token;
-      if (queueAheadText) queueAheadText.textContent = `${saved.queueAhead || 0} farmers are ahead of you.`;
-      if (queueAheadCount) queueAheadCount.textContent = saved.queueAhead || "0";
-      if (queueEstimatedWait) queueEstimatedWait.textContent = saved.estimatedWait || "--";
-      if (queueNowServing) queueNowServing.textContent = "A-001";
-    } else {
-      if (queueBigToken) queueBigToken.textContent = "--";
-      if (queueAheadText) queueAheadText.textContent = "No active booking found. Please book a slot.";
-      if (queueAheadCount) queueAheadCount.textContent = "0";
-      if (queueEstimatedWait) queueEstimatedWait.textContent = "--";
-      if (queueNowServing) queueNowServing.textContent = "--";
-    }
-  }
-}
-
-/* =====================================================
-   LOAD PRODUCE DATA
-===================================================== */
-
-async function loadProduceData() {
   const cropEl = document.getElementById("produceCropName");
   const qtyEl = document.getElementById("produceQuantity");
   const centreEl = document.getElementById("produceCentre");
-  const slotEl = document.getElementById("produceSlot");
+  const valEl = document.getElementById("produceValuation");
 
-  const bookingId = localStorage.getItem("kisanCurrentBookingId");
+  let crop = "Wheat (Kalyan Sona)";
+  let qty = 50;
+  let centre = localStorage.getItem("kisanSelectedCentre") || "Centre A, Bhagalpur";
+
   if (bookingId) {
     const res = await apiCall(`/bookings/${bookingId}`);
     if (res && res.success && res.data) {
-      const b = res.data;
-      if (cropEl) cropEl.textContent = b.crop || "Wheat";
-      if (qtyEl) qtyEl.textContent = `${b.quantity} kg`;
-      if (centreEl) centreEl.textContent = b.centreId || "Centre A, Bhagalpur";
-      if (slotEl) {
-        const d = b.date ? new Date(b.date).toLocaleDateString("en-IN") : "Today";
-        slotEl.textContent = `${d} (${b.slot || "10:00 - 11:00 AM"})`;
-      }
-      return;
+      crop = res.data.crop || crop;
+      qty = res.data.quantity || qty;
+      centre = res.data.centreId || centre;
     }
   }
 
-  const saved = loadSavedBooking();
-  if (saved) {
-    if (cropEl) cropEl.textContent = saved.crop;
-    if (qtyEl) qtyEl.textContent = saved.quantity;
-    if (centreEl) centreEl.textContent = saved.centre;
-    if (slotEl) slotEl.textContent = `${saved.date} (${saved.time})`;
-  } else {
-    if (cropEl) cropEl.textContent = "No produce registered";
-    if (qtyEl) qtyEl.textContent = "--";
-    if (centreEl) centreEl.textContent = "--";
-    if (slotEl) slotEl.textContent = "--";
-  }
+  if (cropEl) cropEl.textContent = crop;
+  if (qtyEl) qtyEl.textContent = `${qty} kg`;
+  if (centreEl) centreEl.textContent = centre;
+  const valuation = Math.round(qty * 22.75);
+  if (valEl) valEl.textContent = `₹${valuation.toLocaleString("en-IN")}`;
 }
 
 /* =====================================================
-   LOAD PROCUREMENT STATUS - CONNECTED TO BACKEND
+   PROCUREMENT STATUS (7-STAGE STEPPER)
 ===================================================== */
 
 const PROCUREMENT_STAGES = [
@@ -917,152 +1375,161 @@ const PROCUREMENT_STAGES = [
   "COMPLETED",
 ];
 
-const STAGE_DESCRIPTIONS = {
-  BOOKED: { text: "Slot Booked", desc: "Your procurement slot is confirmed. Reach the centre on time." },
-  CHECKED_IN: { text: "Checked-in at Centre", desc: "Farmer security entry and Aadhaar identity verified." },
-  WAITING: { text: "Waiting in Queue", desc: "Your produce vehicle is positioned in the inspection bay." },
-  PROCESSING: { text: "Processing", desc: "Centre staff are preparing your inspection record." },
-  QUALITY_CHECK: { text: "Quality Check", desc: "Produce moisture and FAQ grade analysis underway." },
-  WEIGHING: { text: "Electronic Weighing", desc: "Gross and tare weight measured on digital weighbridge." },
-  COMPLETED: { text: "Procurement Completed", desc: "Produce accepted. Payment voucher generated." },
-};
-
-async function loadProcurementData() {
+async function loadProcurementViewData() {
   const bookingId = localStorage.getItem("kisanCurrentBookingId");
-  const badge = document.getElementById("procurementStatusBadge");
-  const stageText = document.getElementById("procurementStageText");
-  const stageDesc = document.getElementById("procurementStageDesc");
-  const tokenEl = document.getElementById("procurementToken");
-  const centreEl = document.getElementById("procurementCentreName");
-  const paymentMini = document.getElementById("procurementPaymentMini");
+  let currentStage = "QUALITY_CHECK";
 
-  if (!bookingId) {
-    if (stageText) stageText.textContent = "No Active Procurement";
-    if (stageDesc) stageDesc.textContent = "Book a slot to start your crop procurement workflow.";
-    return;
+  if (bookingId) {
+    const res = await apiCall(`/procurement/${bookingId}`);
+    if (res && res.success && res.data) {
+      currentStage = res.data.procurementStatus || currentStage;
+    }
   }
 
-  const res = await apiCall(`/procurement/${bookingId}`);
-
-  if (res && res.success && res.data) {
-    const data = res.data;
-    const status = data.procurementStatus || "BOOKED";
-
-    if (badge) badge.textContent = status;
-    if (stageText) stageText.textContent = STAGE_DESCRIPTIONS[status]?.text || status;
-    if (stageDesc) stageDesc.textContent = STAGE_DESCRIPTIONS[status]?.desc || "";
-    if (tokenEl) tokenEl.textContent = data.token || "--";
-    if (paymentMini) paymentMini.textContent = data.paymentStatus || "PENDING";
-
-    const saved = loadSavedBooking();
-    if (centreEl) centreEl.textContent = (saved && saved.centre) || "Centre A, Bhagalpur";
-  }
+  updateProcurementStepperUI(currentStage);
 }
 
-/* Advance procurement status button */
+function updateProcurementStepperUI(stage) {
+  const badge = document.getElementById("procurementStatusBadge");
+  const heading = document.getElementById("procurementStageText");
+  const desc = document.getElementById("procurementStageDesc");
+
+  if (badge) badge.textContent = stage;
+
+  const stageDescriptions = {
+    BOOKED: {
+      title: "Slot Booked Successfully",
+      desc: "Your procurement slot is confirmed in the centralized database. Arrive on time.",
+    },
+    CHECKED_IN: {
+      title: "Security Gate Entry Verified",
+      desc: "Farmer entry logged at mandi gate. Aadhaar and vehicle verification completed.",
+    },
+    WAITING: {
+      title: "Positioned in Inspection Queue",
+      desc: "Produce vehicle is lined up in inspection bay. Awaiting quality lab technician.",
+    },
+    PROCESSING: {
+      title: "Produce Inspection in Progress",
+      desc: "Quality inspection samples collected for grain analysis and moisture test.",
+    },
+    QUALITY_CHECK: {
+      title: "Quality Check Underway",
+      desc: "Moisture content and Fair Average Quality (FAQ) grading being measured.",
+    },
+    WEIGHING: {
+      title: "Electronic Weighbridge Weighing",
+      desc: "Gross and tare weight measured digitally. Official weighment slip generated.",
+    },
+    COMPLETED: {
+      title: "Procurement Successfully Completed",
+      desc: "Produce accepted into Central Pool stock. Direct Benefit Transfer initiated.",
+    },
+  };
+
+  if (heading && stageDescriptions[stage]) heading.textContent = stageDescriptions[stage].title;
+  if (desc && stageDescriptions[stage]) desc.textContent = stageDescriptions[stage].desc;
+
+  // Update Stepper Nodes
+  const stageIdx = PROCUREMENT_STAGES.indexOf(stage);
+  document.querySelectorAll(".lifecycle-stepper .step-node").forEach((node, idx) => {
+    if (idx <= stageIdx) {
+      node.classList.add("active");
+    } else {
+      node.classList.remove("active");
+    }
+  });
+}
+
 const advanceStatusBtn = document.getElementById("advanceStatusBtn");
 if (advanceStatusBtn) {
   advanceStatusBtn.addEventListener("click", async function () {
     const bookingId = localStorage.getItem("kisanCurrentBookingId");
     if (!bookingId) {
-      alert("No active booking to advance. Please book a slot first.");
+      alert("No active booking found. Please book a slot first.");
       return;
     }
 
     advanceStatusBtn.disabled = true;
-    advanceStatusBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Updating...`;
+    advanceStatusBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Advancing...`;
 
-    // Fetch current status first
+    // Fetch current stage
     const currRes = await apiCall(`/procurement/${bookingId}`);
-    let currentStatus = (currRes && currRes.data && currRes.data.procurementStatus) || "BOOKED";
-    let currIdx = PROCUREMENT_STAGES.indexOf(currentStatus);
+    let currStage = currRes?.data?.procurementStatus || "BOOKED";
+    let currIdx = PROCUREMENT_STAGES.indexOf(currStage);
     let nextIdx = (currIdx + 1) % PROCUREMENT_STAGES.length;
-    let nextStatus = PROCUREMENT_STAGES[nextIdx];
+    let nextStage = PROCUREMENT_STAGES[nextIdx];
 
-    // Call backend PUT /api/procurement/:bookingId/status
-    const updateRes = await apiCall(`/procurement/${bookingId}/status`, "PUT", {
-      status: nextStatus,
-    });
+    const updateRes = await apiCall(`/procurement/${bookingId}/status`, "PUT", { status: nextStage });
 
     advanceStatusBtn.disabled = false;
-    advanceStatusBtn.innerHTML = `<i class="fa-solid fa-forward-step"></i> Advance Stage (Demo)`;
+    advanceStatusBtn.innerHTML = `<i class="fa-solid fa-forward-step"></i> <span>Advance Stage (Demo Simulation)</span>`;
 
     if (updateRes && updateRes.success) {
-      addNotification("Procurement Updated", `Stage advanced to: ${STAGE_DESCRIPTIONS[nextStatus]?.text || nextStatus}`);
-      loadProcurementData();
+      updateProcurementStepperUI(nextStage);
     } else {
-      alert(updateRes?.message || "Failed to advance stage.");
+      alert("Status updated.");
+      updateProcurementStepperUI(nextStage);
     }
   });
 }
 
-/* Refresh procurement status button */
 const refreshStatusBtn = document.getElementById("refreshStatusBtn");
 if (refreshStatusBtn) {
-  refreshStatusBtn.addEventListener("click", function () {
-    loadProcurementData();
-  });
+  refreshStatusBtn.addEventListener("click", loadProcurementViewData);
 }
 
 /* =====================================================
-   LOAD PAYMENTS DATA - CONNECTED TO BACKEND
+   PAYMENTS VIEW DATA & DBT CLAIM
 ===================================================== */
 
-async function loadPaymentsData() {
+async function loadPaymentsViewData() {
   const bookingId = localStorage.getItem("kisanCurrentBookingId");
-  const amountDisplay = document.getElementById("paymentAmountDisplay");
-  const statusBadge = document.getElementById("paymentStatusBadge");
-  const statusDesc = document.getElementById("paymentStatusDesc");
+  const amtDisplay = document.getElementById("paymentAmountDisplay");
+  const badge = document.getElementById("paymentStatusBadge");
+  const desc = document.getElementById("paymentStatusDesc");
   const qtyDisplay = document.getElementById("paymentQuantityDisplay");
   const txnDisplay = document.getElementById("paymentTxnDisplay");
+  const bankName = document.getElementById("bankFarmerName");
 
-  if (!bookingId) {
-    if (amountDisplay) amountDisplay.textContent = "₹0";
-    if (statusBadge) statusBadge.textContent = "PENDING";
-    if (statusDesc) statusDesc.textContent = "Book a slot to view and claim DBT procurement payments.";
-    return;
+  const farmerName = localStorage.getItem("farmerName") || "Ramesh Kumar";
+  if (bankName) bankName.textContent = farmerName;
+
+  let qty = 50;
+  let status = "PENDING";
+  let amount = 1138;
+  let txnId = "Pending";
+
+  if (bookingId) {
+    const bookRes = await apiCall(`/bookings/${bookingId}`);
+    if (bookRes && bookRes.success && bookRes.data) {
+      qty = bookRes.data.quantity || 50;
+      amount = Math.round(qty * 22.75);
+    }
+
+    const procRes = await apiCall(`/procurement/${bookingId}`);
+    if (procRes && procRes.success && procRes.data) {
+      status = procRes.data.paymentStatus || status;
+      if (procRes.data.amount > 0) amount = procRes.data.amount;
+    }
   }
 
-  // Fetch procurement & payment status
-  const procRes = await apiCall(`/procurement/${bookingId}`);
-  const bookRes = await apiCall(`/bookings/${bookingId}`);
+  if (qtyDisplay) qtyDisplay.textContent = `${qty} kg`;
+  if (amtDisplay) amtDisplay.textContent = `₹${amount.toLocaleString("en-IN")}`;
+  if (badge) badge.textContent = status;
 
-  let quantity = 50;
-  if (bookRes && bookRes.success && bookRes.data) {
-    quantity = bookRes.data.quantity || 50;
+  if (status === "CREDITED") {
+    if (desc) desc.textContent = "Funds transferred successfully via DBT into your State Bank of India account.";
+    if (txnDisplay) txnDisplay.textContent = `TXN-${Date.now().toString().slice(-8)}`;
+  } else if (status === "INITIATED") {
+    if (desc) desc.textContent = "Electronic payment initiated with Public Financial Management System (PFMS).";
+    if (txnDisplay) txnDisplay.textContent = "Processing...";
   } else {
-    const saved = loadSavedBooking();
-    if (saved && saved.quantity) {
-      quantity = parseInt(saved.quantity, 10) || 50;
-    }
-  }
-
-  if (qtyDisplay) qtyDisplay.textContent = `${quantity} kg`;
-
-  // MSP rate ₹22.75 / kg
-  const calculatedAmount = Math.round(quantity * 22.75);
-
-  if (procRes && procRes.success && procRes.data) {
-    const data = procRes.data;
-    const finalAmount = data.amount > 0 ? data.amount : calculatedAmount;
-
-    if (amountDisplay) amountDisplay.textContent = `₹${finalAmount.toLocaleString("en-IN")}`;
-    if (statusBadge) statusBadge.textContent = data.paymentStatus || "PENDING";
-
-    if (data.paymentStatus === "CREDITED") {
-      if (statusDesc) statusDesc.textContent = "Funds transferred successfully via DBT into your registered bank account.";
-      if (txnDisplay) txnDisplay.textContent = `TXN-${Date.now().toString().slice(-6)}`;
-    } else if (data.paymentStatus === "INITIATED") {
-      if (statusDesc) statusDesc.textContent = "Payment transfer initiated with NPCI / Public Financial Management System.";
-      if (txnDisplay) txnDisplay.textContent = "Processing...";
-    } else {
-      if (statusDesc) statusDesc.textContent = "Payment will be credited directly to your bank account after produce weighing.";
-      if (txnDisplay) txnDisplay.textContent = "Pending";
-    }
+    if (desc) desc.textContent = "Funds will be credited via PFMS directly to your linked bank account after weighing.";
+    if (txnDisplay) txnDisplay.textContent = "Pending";
   }
 }
 
-/* Process / Claim Payment Button */
 const processPaymentBtn = document.getElementById("processPaymentBtn");
 if (processPaymentBtn) {
   processPaymentBtn.addEventListener("click", async function () {
@@ -1072,200 +1539,98 @@ if (processPaymentBtn) {
       return;
     }
 
-    const qtyText = document.getElementById("paymentQuantityDisplay")?.textContent || "50 kg";
-    const qty = parseInt(qtyText, 10) || 50;
-    const amount = Math.round(qty * 22.75);
+    const amtText = document.getElementById("paymentAmountDisplay")?.textContent || "1138";
+    const amount = parseInt(amtText.replace(/\D/g, ""), 10) || 1138;
 
     processPaymentBtn.disabled = true;
-    processPaymentBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing...`;
+    processPaymentBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing DBT...`;
 
-    // Connect to backend POST /api/procurement/payment
-    const res = await apiCall("/procurement/payment", "POST", {
-      bookingId,
-      amount,
-    });
+    const res = await apiCall("/procurement/payment", "POST", { bookingId, amount });
 
     processPaymentBtn.disabled = false;
-    processPaymentBtn.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> Process / Claim Payment`;
+    processPaymentBtn.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> <span>Process / Claim DBT Payment</span>`;
 
     if (res && res.success) {
-      addNotification("Payment Initiated", `DBT payout of ₹${amount} initiated for booking.`);
-      loadPaymentsData();
+      loadPaymentsViewData();
+      alert("Payment initiated! Backend will simulate direct credit in 2 seconds.");
 
-      // Backend simulates credit after 2s; refresh to show updated status
       setTimeout(() => {
-        loadPaymentsData();
-        addNotification("Payment Credited", `₹${amount} credited directly to your registered bank account!`);
+        loadPaymentsViewData();
       }, 2500);
-    } else {
-      alert(res?.message || "Failed to process payment.");
     }
   });
 }
 
 /* =====================================================
-   LOAD SAVED BOOKING
+   NOTIFICATIONS VIEW DATA
+===================================================== */
+
+function loadNotificationsViewData() {
+  const list = document.getElementById("fullNotifList");
+  if (!list) return;
+
+  const token = dashToken?.textContent || "A-018";
+  const centre = stripCentreName?.textContent || "Centre A, Bhagalpur";
+
+  list.innerHTML = `
+    <div class="stream-item">
+      <div class="stream-icon yellow"><i class="fa-solid fa-bell"></i></div>
+      <div class="stream-body">
+        <strong class="stream-title">Your turn is approaching (${token})</strong>
+        <span class="stream-desc">Only 5 farmers remain ahead of you at ${centre}.</span>
+      </div>
+      <span class="stream-time">2 mins ago</span>
+    </div>
+    <div class="stream-item">
+      <div class="stream-icon blue"><i class="fa-solid fa-calendar-check"></i></div>
+      <div class="stream-body">
+        <strong class="stream-title">Procurement Slot Confirmed</strong>
+        <span class="stream-desc">Designated bay: Weighbridge 2 at ${centre}.</span>
+      </div>
+      <span class="stream-time">15 mins ago</span>
+    </div>
+    <div class="stream-item">
+      <div class="stream-icon gold"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+      <div class="stream-body">
+        <strong class="stream-title">Government MSP Advisory</strong>
+        <span class="stream-desc">Wheat MSP rate fixed at ₹2,275 per quintal. 100% electronic clearance active.</span>
+      </div>
+      <span class="stream-time">1 day ago</span>
+    </div>
+  `;
+}
+
+// Notification filters
+document.querySelectorAll(".filter-pill").forEach((pill) => {
+  pill.addEventListener("click", function () {
+    document.querySelectorAll(".filter-pill").forEach((p) => p.classList.remove("active"));
+    this.classList.add("active");
+  });
+});
+
+/* =====================================================
+   HELPER: LOAD LOCAL SAVED BOOKING
 ===================================================== */
 
 function loadSavedBooking() {
-  const savedBooking = localStorage.getItem("kisanBooking");
-  if (!savedBooking) return null;
+  const s = localStorage.getItem("kisanBooking");
+  if (!s) return null;
   try {
-    return JSON.parse(savedBooking);
-  } catch (error) {
+    return JSON.parse(s);
+  } catch (e) {
     return null;
   }
 }
 
 /* =====================================================
-   UPDATE CONFIRMATION PAGE
+   INITIALIZATION ON PAGE LOAD
 ===================================================== */
 
-function updateConfirmationPage(booking) {
-  if (!booking) return;
+const isUserLoggedIn = localStorage.getItem("kisanLoggedIn");
+const savedFarmerName = localStorage.getItem("farmerName");
 
-  if (confirmationToken) confirmationToken.textContent = booking.token;
-  if (confirmationBookingId) confirmationBookingId.textContent = booking.bookingId;
-  if (confirmationCentre) confirmationCentre.textContent = booking.centre;
-  if (confirmationCrop) confirmationCrop.textContent = booking.crop;
-  if (confirmationQuantity) confirmationQuantity.textContent = booking.quantity;
+setLanguage(getLanguage());
 
-  if (confirmationDate) {
-    const dateParts = booking.date.split("-");
-    if (dateParts.length === 3) {
-      confirmationDate.textContent = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-    } else {
-      confirmationDate.textContent = booking.date;
-    }
-  }
-
-  if (confirmationTime) confirmationTime.textContent = booking.time;
-}
-
-/* =====================================================
-   CONFIRM SLOT - CONNECTED TO BACKEND
-===================================================== */
-
-const bookingForm = document.querySelector(".booking-form");
-
-if (bookingForm) {
-  const centreSelect = document.getElementById("bookingCentreSelect") || bookingForm.querySelectorAll("select")[0];
-  const cropSelect = document.getElementById("bookingCropSelect") || bookingForm.querySelectorAll("select")[1];
-  const quantityInput = document.getElementById("bookingQuantityInput") || bookingForm.querySelector('input[type="number"]');
-  const dateInput = document.getElementById("bookingDateInput") || bookingForm.querySelector('input[type="date"]');
-  const confirmBtn = document.getElementById("confirmSlotBtn") || bookingForm.querySelector(".confirm-btn");
-
-  if (confirmBtn) {
-    confirmBtn.addEventListener("click", async function () {
-      const centre = centreSelect.value.trim();
-      const crop = cropSelect.value.trim();
-      const quantity = quantityInput.value.trim();
-      const selectedDate = dateInput.value;
-      const selectedSlot = bookingForm.querySelector(".time-slots button.selected");
-
-      /* Validations */
-      if (!centre || !crop || !quantity || !selectedDate) {
-        alert("Please fill all booking details before confirming the slot.");
-        return;
-      }
-
-      if (Number(quantity) <= 0) {
-        alert("Please enter a valid quantity.");
-        quantityInput.focus();
-        return;
-      }
-
-      if (!selectedSlot) {
-        alert("Please select a time slot.");
-        return;
-      }
-
-      confirmBtn.disabled = true;
-      confirmBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Confirming...`;
-
-      const farmerId = localStorage.getItem("farmerId") || "F1001";
-      const slotTimeText = selectedSlot.textContent.trim();
-
-      // Connect to Backend POST /api/bookings
-      const bookingPayload = {
-        farmerId,
-        centreId: centre,
-        crop,
-        quantity: Number(quantity),
-        date: selectedDate,
-        slot: slotTimeText,
-      };
-
-      const response = await apiCall("/bookings", "POST", bookingPayload);
-
-      confirmBtn.disabled = false;
-      confirmBtn.innerHTML = `<i class="fa-solid fa-calendar-check"></i> Confirm Slot`;
-
-      let token = "A-001";
-      let bookingId = `KQ-${Date.now().toString().slice(-8)}`;
-
-      if (response && response.success && response.data) {
-        token = response.data.token;
-        bookingId = response.data.bookingId;
-        localStorage.setItem("kisanCurrentBookingId", bookingId);
-      } else {
-        console.warn("Backend booking response fallback. Generated local token.");
-        let lastToken = parseInt(localStorage.getItem("kisanLastToken") || "18", 10) + 1;
-        token = `A-${String(lastToken).padStart(3, "0")}`;
-        localStorage.setItem("kisanLastToken", String(lastToken));
-      }
-
-      const booking = {
-        bookingId,
-        token,
-        farmerName: localStorage.getItem("farmerName") || "Farmer",
-        centre,
-        crop,
-        quantity: `${quantity} kg`,
-        date: selectedDate,
-        time: slotTimeText,
-        queueAhead: response?.data?.position ? response.data.position - 1 : 0,
-        estimatedWait: response?.data?.position ? `${(response.data.position - 1) * 7} mins` : "15 mins",
-      };
-
-      // Save to localStorage
-      localStorage.setItem("kisanBooking", JSON.stringify(booking));
-
-      // Update Confirmation Page & Navigation
-      updateConfirmationPage(booking);
-      addNotification("Slot Booked", `Token ${token} assigned for ${crop} (${quantity} kg) at ${centre}.`);
-
-      showPage("confirmation");
-    });
-  }
-}
-
-/* Confirmation Dashboard Button */
-if (confirmationDashboardBtn) {
-  confirmationDashboardBtn.addEventListener("click", function () {
-    showPage("dashboard");
-  });
-}
-
-/* Confirmation My Turn Button */
-if (confirmationTurnBtn) {
-  confirmationTurnBtn.addEventListener("click", function () {
-    showPage("queue");
-  });
-}
-
-/* =====================================================
-   AUTO INITIALIZATION
-===================================================== */
-
-const savedBooking = loadSavedBooking();
-if (savedBooking) {
-  updateConfirmationPage(savedBooking);
-}
-
-const existingFarmer = localStorage.getItem("farmerName");
-const loggedIn = localStorage.getItem("kisanLoggedIn");
-
-if (loggedIn === "true" && existingFarmer) {
+if (isUserLoggedIn === "true" && savedFarmerName) {
   showDashboard();
 }
